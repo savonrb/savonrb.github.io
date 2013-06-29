@@ -36,7 +36,7 @@
 # activate :automatic_image_sizes
 
 # Reload the browser automatically whenever files change
-# activate :livereload
+activate :livereload
 
 # Methods defined in the helpers block are available in templates
 # helpers do
@@ -50,6 +50,34 @@ set :css_dir, 'stylesheets'
 set :js_dir, 'javascripts'
 
 set :images_dir, 'images'
+
+set :markdown_engine, :redcarpet
+
+# XXX: Does not seem to work.
+#set :markdown, options
+
+# XXX: Find out how to properly pass markdown options
+# to Tilt for an embedded Slim engine.
+class Tilt::RedcarpetTemplate::Redcarpet2
+
+  alias_method :original_prepare, :prepare
+
+  def prepare
+    options.merge!(
+      autolink:                     true,
+      fenced_code_blocks:           true,
+      no_intra_emphasis:            true,
+      tables:                       true,
+      strikethrough:                true,
+      disable_indented_code_blocks: true,
+      space_after_headers:          true,
+      superscript:                  true
+    )
+
+    original_prepare
+  end
+
+end
 
 # Build-specific configuration
 configure :build do
