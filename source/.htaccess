@@ -1,0 +1,3 @@
+Redirect 301 /version1.html http://savonrb.com/version1/
+Redirect 301 /version2.html http://savonrb.com/version2/
+Redirect 301 /version3.html http://savonrb.com/version3/
