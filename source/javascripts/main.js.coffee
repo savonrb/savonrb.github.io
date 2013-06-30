@@ -6,7 +6,6 @@ $ ->
   # delayed code block icons, because highlight.js
   # can be a little slow and doesn't provide a callback.
   setTimeout ->
-    console.log 'bla'
     $('pre code').each ->
       classes = $(this).attr('class')
       $(this).parent().addClass(classes)
