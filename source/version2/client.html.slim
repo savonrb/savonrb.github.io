@@ -68,7 +68,7 @@ markdown:
   But the client really exists to send SOAP messages, so let's do that.
 
   ``` ruby
-  response = dnnad jksdjfds jsdfjkb jkbsf djbkfs client.call(:authenticate, message: { username: "luke", password: "secret" })
+  response = client.call(:authenticate, message: { username: "luke", password: "secret" })
   ```
 
   If you used Savon before, this should also look familiar to you. But in contrast to the old client,
