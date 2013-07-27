@@ -117,6 +117,15 @@ markdown:
   If you need to use this option, please open an issue and provide you WSDL for debugging.
   This should be handled automatically, but we need real world examples to do so.
 
+  #### soap_header
+
+  Since v2.3.0 you can specify the SOAP header per request. When both the global and local
+  option is used, Savon will merge the global with the local Hash.
+
+  ``` ruby
+  client.call(:authenticate, :soap_header => { "OpToken" => "secret" })
+  ```
+
   #### xml
 
   If you need to, you can even shortcut Savon's Builder and send your very own XML.

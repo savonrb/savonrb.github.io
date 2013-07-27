@@ -348,6 +348,17 @@ markdown:
   Savon.client(wsse_timestamp: true)
   ```
 
+  #### ntlm
+
+  HTTPI v2.1.0 supports [NTLM authentication](http://httpirb.com/#authentication) through its `:net_http` adapter.
+  The optional third argument allows you to specify a domain. If the domain is omitted, it is assumed
+  you want to authenticate with the local server.
+
+  ``` ruby
+  Savon.client(ntlm: ["username", "password"])
+  Savon.client(ntlm: ["username", "password", "domain"])
+  ```
+
 
   ### Response
 
