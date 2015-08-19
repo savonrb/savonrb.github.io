@@ -5,21 +5,21 @@ title: Getting started
 
 
 markdown:
-  Version 3 is [available via GitHub](https://github.com/savonrb/savon).
+  Version 3 is now known under the name Sekken and is [available via GitHub](https://github.com/savonrb/sekken).
   Add it to your [Gemfile](http://gembundler.com/) to try it out:
 
   ``` ruby
-  gem 'savon', github: 'savonrb/savon'
+  gem 'savon', github: 'savonrb/sekken'
   ```
 
-  Instantiate Savon with a URL or the path to a local WSDL document.
+  Instantiate Sekken with a URL or the path to a local WSDL document.
 
   ``` ruby
-  client = Savon.new('http://example.com?wsdl')
+  client = Sekken.new('http://example.com?wsdl')
   ```
 
   Operations are separated by service and port and you need to specify them to get an Operation to call.
-  Savon exposes the services and ports defined by the WSDL along with their namespace and endpoint for you.
+  Sekken exposes the services and ports defined by the WSDL along with their namespace and endpoint for you.
 
   ``` ruby
   client.services
@@ -63,10 +63,10 @@ markdown:
   ```
 
   Notice how you can use both Strings and Symbols for the service, ports and operation names.
-  The casing matches the casing defined by the WSDL. Savon no longer converts names to snakecase
+  The casing matches the casing defined by the WSDL. Sekken no longer converts names to snakecase
   and it also doesn't treat Symbols in any special way.
 
-  Now let's look at how you can configure and call this Operation. Just like Savon exposed the
+  Now let's look at how you can configure and call this Operation. Just like Sekken exposed the
   services, ports and operations, it can also tell you about the operation's parameters.
 
   ``` ruby
@@ -74,7 +74,7 @@ markdown:
   ```
 
   This looks at the parts defined for the SOAP body and returns a Hash that follows the structure
-  expected by Savon (needs to be formalized) to call the operation. Keys are matching parameter-/
+  expected by Sekken (needs to be formalized) to call the operation. Keys are matching parameter-/
   element-names and values indicate the simple types. Currently this Hash contains both required
   and optional elements without a good way to indicate what's required and what's not. If you can
   think of a nice way to accomplish this, please let me know.
@@ -88,8 +88,8 @@ markdown:
   }
   ```
 
-  Savon also knows the parts defined for the SOAP header and of course you can create an example
-  Hash for that as well. In case Savon returns an empty Hash, then there is no header and you don't
+  Sekken also knows the parts defined for the SOAP header and of course you can create an example
+  Hash for that as well. In case Sekken returns an empty Hash, then there is no header and you don't
   need to care about it.
 
   ``` ruby
