@@ -19,7 +19,7 @@ markdown:
   You can then globally change the adapter to use.
 
   ``` ruby
-  Savon.http_adapter = MyAdapter
+  MyAdapter = Savon.http_adapter
   ```
 
   or you can pass an instance of your adapter to Savon to only use it per-client.
