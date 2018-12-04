@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 gem 'rake', '~> 10.1'
-gem 'middleman', '~> 3.1'
+gem 'middleman', '~> 3.2'
 gem 'middleman-livereload', '~> 3.1'
 gem 'middleman-syntax'
 
