@@ -6,7 +6,7 @@ gem 'middleman-livereload', '~> 3.1'
 gem 'middleman-syntax'
 
 gem 'slim', '~> 2.0'
-gem 'redcarpet', '2.1.1'
+gem 'redcarpet', '3.4.0'
 
 # monkey-patched
 gem 'tilt', '1.3.7'
