@@ -1,0 +1,451 @@
+.icon: after, .status.stable: after, .status.unstable: after, .status.deprecated: after, pre.bash: after, pre.ruby: after, pre.xml: after {
+    font-family: FontAwesome;
+    color: #ddd;
+    position: relative;
+    right: 10px;
+    top: 0
+}
+#floating-link-list {
+    position: fixed;
+    top: 98px;
+    right: 30px;
+    list-style: none
+}
+#floating-link-list li {
+    text-align: right
+}
+#floating-link-list li.on p {
+    visibility: visible
+}
+#floating-link-list li.on a {
+    color: #333
+}
+#floating-link-list li p {
+    display: inline-block;
+    visibility: hidden;
+    color: #333;
+    font-size: 16px;
+    font-family: georgia, "times new roman", times, serif;
+    margin-bottom: 5px
+}
+#floating-link-list li a {
+    color: #ddd;
+    display: inline-block;
+    margin-left: 10px;
+    width: 25px
+}
+#floating-link-list li a.icon-github {
+    margin: 0 3px 0 7px
+}
+#floating-link-list li a.icon-comments {
+    margin: 0 1px 0 9px
+}
+#floating-link-list li a.icon-twitter {
+    margin: 0 1px 0 9px
+}
+.list-of-icons {
+    list-style: none;
+    padding-left: 30px;
+    text-indent: -30px
+}
+.list-of-icons i {
+    display: inline-block;
+    margin-right: 6px;
+    width: 24px
+}
+.list-of-icons i.icon-github {
+    margin-left: 2px;
+    margin-right: 4px
+}
+.list-of-icons i.icon-comments {
+    margin: 0 5px 0 1px
+}
+.list-of-icons i.icon-twitter {
+    margin: 0 5px 0 1px
+}
+.list-of-icons i {
+    padding-left: 0;
+    text-indent: 0
+}
+.status {
+    position: relative;
+    border-bottom: 1px solid #e8e8e8;
+    margin-bottom: 45px
+}
+.status: after {
+    margin-bottom: 18px
+}
+.status p {
+    font-family: georgia, "times new roman", times, serif;
+    display: inline-block;
+    margin: 0 30px 20px 0;
+    width: 680px
+}
+.status i {
+    position: absolute;
+    bottom: 22px;
+    right: 0;
+    width: 30px
+}
+.status.stable {
+    color: #7bb900
+}
+.status.stable: after {
+    content: "\f164";
+    color: #7bb900
+}
+.status.unstable {
+    color: #cb6465
+}
+.status.unstable: after {
+    content: "\f071";
+    color: #cb6465
+}
+.status.deprecated {
+    color: #d3a408
+}
+.status.deprecated: after {
+    content: "\f165";
+    color: #d3a408
+}
+#prev-next {
+    margin-top: 90px;
+    border-top: 1px solid #e8e8e8;
+    padding-top: 15px;
+    list-style: none
+}
+#prev-next li {
+    font-family: georgia, "times new roman", times, serif;
+    font-size: 14px;
+    display: inline-block;
+    width: 50%
+}
+#prev-next li i {
+    color: #ddd;
+    vertical-align: text-bottom
+}
+#prev-next li a {
+    text-decoration: none
+}
+#prev-next li a: hover {
+    text-decoration: underline
+}
+#prev-next li.prev i {
+    margin-right: 10px
+}
+#prev-next li.next {
+    text-align: right
+}
+#prev-next li.next i {
+    margin-left: 10px
+}
+* {
+    margin: 0;
+    padding: 0
+}
+pre code {
+    display: block;
+    padding: .5em;
+    background: #fdf6e3;
+    color: #657b83
+}
+pre .comment,
+pre .template_comment,
+pre .diff .header,
+pre .doctype,
+pre .pi,
+pre .lisp .string,
+pre .javadoc {
+    color: #93a1a1;
+    font-style: italic
+}
+pre .keyword,
+pre .winutils,
+pre .method,
+pre .addition,
+pre .css .tag,
+pre .request,
+pre .status,
+pre .nginx .title {
+    color: #859900
+}
+pre .number,
+pre .command,
+pre .string,
+pre .tag .value,
+pre .phpdoc,
+pre .tex .formula,
+pre .regexp,
+pre .hexcolor {
+    color: #2aa198
+}
+pre .title,
+pre .localvars,
+pre .chunk,
+pre .decorator,
+pre .built_in,
+pre .identifier,
+pre .vhdl .literal,
+pre .id {
+    color: #268bd2
+}
+pre .attribute,
+pre .variable,
+pre .lisp .body,
+pre .smalltalk .number,
+pre .constant,
+pre .class .title,
+pre .parent,
+pre .haskell .type {
+    color: #b58900
+}
+pre .preprocessor,
+pre .preprocessor .keyword,
+pre .shebang,
+pre .symbol,
+pre .symbol .string,
+pre .diff .change,
+pre .special,
+pre .attr_selector,
+pre .important,
+pre .subst,
+pre .cdata,
+pre .clojure .title {
+    color: #cb4b16
+}
+pre .deletion {
+    color: #dc322f
+}
+pre .tex .formula {
+    background: #eee8d5
+}
+code {
+    font: 15px/18px"Inconsolata", Monaco, "Courier New", "DejaVu Sans Mono", "Bitstream Vera Sans Mono", monospace;
+    background: #e8e8e8;
+    border-bottom: 1px solid #e8e8e8;
+    padding: 3px 8px
+}
+pre {
+    margin-top: 30px;
+    border-bottom: 1px solid #e8e8e8;
+    margin-bottom: 45px
+}
+pre code {
+    background: none;
+    border-bottom: none;
+    color: #333;
+    display: inline-block;
+    overflow: scroll;
+    padding: 10px 0 20px 0;
+    margin-right: 30px;
+    width: 690px
+}
+pre .tag .value,
+pre .string,
+pre .function .title {
+    color: #d3a408
+}
+pre .symbol,
+pre .constant,
+pre .class .title {
+    color: #7bb900
+}
+pre .comment {
+    color: #aaa
+}
+pre.bash: after {
+    content: "\f120";
+    top: -22px
+}
+pre.ruby: after {
+    content: "\f121";
+    top: -22px
+}
+pre.xml: after {
+    content: "\f0f6";
+    top: -22px
+}
+#header {
+    margin-left: 245px;
+    margin-bottom: 50px;
+    padding: 0 20px;
+}
+#header h1 {
+    color: #333;
+    font-size: 6em;
+    line-height: 1em;
+    margin: 0
+}
+#header h1 a,
+#header h1 a:hover {
+    text-decoration: none
+}
+#header hr {
+    border: 0;
+    background-color: #e8e8e8;
+    height: 1px;
+    margin: 0;
+    width: 80%;
+}
+#header h2 {
+    font-size: 2em;
+    letter-spacing: .15em;
+    color: #999;
+    font-weight: 100;
+    margin: 0
+}
+#mobile-nav {
+    display: none;
+    overflow: hidden;
+    border-top: 2px solid #ddd
+}
+#mobile-nav .nav-copy {
+    float: left;
+    margin: 20px 0 0 20px
+}
+#mobile-nav .nav-copy strong {
+    display: none
+}
+#mobile-nav .nav-copy ol {
+    display: none;
+    white-space: nowrap
+}
+#mobile-nav .nav-copy ol li {
+    font-family: georgia, "times new roman", times, serif;
+    color: #aaa
+}
+#mobile-nav .nav-copy ol li.on {
+    color: #333
+}
+#mobile-nav .nav-copy strong+ol {
+    margin-top: 24px
+}
+#mobile-nav .nav-copy a {
+    text-decoration: none
+}
+#mobile-nav .nav-copy a: hover {
+    text-decoration: underline
+}
+#mobile-nav .trigger {
+    float: right;
+    background: #ddd;
+    padding: 5px;
+    margin-right: 20px
+}
+#mobile-nav.on {
+    background: rgba(0, 0, 0, .1);
+    border-bottom: 1px solid #fff;
+    -webkit-box-shadow: inset 0 -15px 5px -15px rgba(0, 0, 0, .1)
+}
+#mobile-nav.on strong {
+    display: block
+}
+#mobile-nav.on ol {
+    display: block
+}
+#nav {
+    float: left;
+    width: 245px;
+    margin-bottom: 60px
+}
+#nav strong {
+    display: block;
+    margin-top: 33px;
+    margin-bottom: 24px
+}
+#nav ol {
+    font-size: 14px;
+    line-height: 22px;
+    margin-top: 122px;
+    list-style-position: inside
+}
+#nav ol li {
+    font-family: georgia, "times new roman", times, serif;
+    color: #ddd
+}
+#nav ol li.on {
+    color: #333
+}
+#nav strong+ol {
+    margin-top: 65px
+}
+#nav a {
+    text-decoration: none
+}
+#nav a: hover {
+    text-decoration: underline
+}
+#content {
+    float: left;
+    width: 730px;
+    padding: 0 20px;
+    margin-bottom: 60px
+}
+body {
+    color: #333;
+    font-family: "Open Sans", sans-serif;
+    font-size: 18px;
+    line-height: 24px;
+    background: #f7f9f6
+}
+#wrapper {
+    margin: 0 auto;
+    max-width: 1260px
+}
+strong,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: georgia, "times new roman", times, serif;
+    letter-spacing: .03em
+}
+p,
+ul,
+ol,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    margin-bottom: 24px
+}
+ol,
+ul {
+    list-style-position: outside
+}
+h1 {
+    font-size: 60px;
+    line-height: 60px;
+    margin-bottom: 60px
+}
+h2 {
+    font-size: 40px;
+    line-height: 40px;
+    margin-top: 90px
+}
+h3 {
+    font-size: 30px;
+    line-height: 30px;
+    margin: 90px 0 40px 0
+}
+h4 {
+    margin-top: 60px
+}
+h3+h4 {
+    margin-top: 40px
+}
+a {
+    color: #333;
+    text-decoration: underline
+}
+a: hover {
+    color: #333;
+    text-decoration: none
+}
+.no-list {
+    list-style: none
+}

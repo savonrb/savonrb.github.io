@@ -1,4 +1,5 @@
-/.bundle
-/build
-/.sass-cache
-deploy
+_site
+.sass-cache
+.jekyll-cache
+.jekyll-metadata
+vendor
