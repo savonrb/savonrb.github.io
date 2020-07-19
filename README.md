@@ -1,3 +1,3 @@
 # Documentation for Savon
 
-Build with [Middleman](http://middlemanapp.com). Live at [savonrb.com](http://savonrb.com).
+Built on [Github Pages](https://pages.github.com/). Live at [savonrb.com](http://savonrb.com).
