@@ -16,11 +16,12 @@ back then, adapted by tons of libraries, its problem is global state. I tried to
 #### wsdl
 
 Savon accepts either a local or remote WSDL document which it uses to extract information like the SOAP
-endpoint and target namespace of the service.
+endpoint and target namespace of the service. Alternatively, you can set the WSDL as a String.
 
 ``` ruby
 Savon.client(wsdl: "http://example.com?wsdl")
 Savon.client(wsdl: "/Users/me/project/service.wsdl")
+Savon.client(wsdl: File.read("/Users/me/project/service.wsdl"))
 ```
 
 For learning how to read a WSDL document, read the [Beginner's Guide](http://predic8.com/wsdl-reading.htm) by Thomas Bayer.
