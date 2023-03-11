@@ -3,7 +3,6 @@ savon_version: v1
 order: 3
 title: Handling the response
 layout: default
-nav: nav_versions.md
 nav_savon_version: v1
 ---
 

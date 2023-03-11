@@ -2,8 +2,7 @@
 savon_version: v2
 order: 11
 title: Changes
-layout: default
-nav: nav_versions.md
+layout: guides
 nav_savon_version: v2
 ---
 

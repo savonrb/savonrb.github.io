@@ -2,7 +2,6 @@
 name: Version 1
 url: version1
 layout: default
-nav: nav_versions.md
 nav_savon_version: v1
 ---
 

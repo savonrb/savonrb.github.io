@@ -17,21 +17,22 @@
 # you will see them accessed via {{ site.title }}, {{ site.email }}, and so on.
 # You can create any custom variable you would like, and they will be accessible
 # in the templates via {{ site.myvariable }}.
-
+github:
+  repository_url: https://github.com/savonrb/savon
 title: Savon
 email: ""
 description: >- # this means to ignore newlines until "baseurl:"
   Heavy metal SOAP client
 baseurl: "" # the subpath of your site, e.g. /blog
-url: "https://savonrb.com" # the base hostname & protocol for your site
+url: "https://www.savonrb.com" # the base hostname & protocol for your site
 markdown: GFM
 twitter_username: savonrb
-github_username:  savonrb
+github_username: savonrb
 
 # Build settings
-theme: minima
+remote_theme: pages-themes/hacker@v0.2.0
 plugins:
-  - jekyll-feed
+  - jekyll-remote-theme # add this line to the plugins list if you already have one
 
 collections:
   versions:
@@ -44,14 +45,11 @@ collections:
 # Excluded items can be processed by explicitly listing the directories or
 # their entries' file path in the `include:` list.
 #
-# exclude:
-#   - .sass-cache/
-#   - .jekyll-cache/
-#   - gemfiles/
-#   - Gemfile
-#   - Gemfile.lock
-#   - node_modules/
-#   - vendor/bundle/
-#   - vendor/cache/
-#   - vendor/gems/
-#   - vendor/ruby/
+exclude:
+  - .sass-cache/
+  - .jekyll-cache/
+  - gemfiles/
+  - Gemfile
+  - Gemfile.lock
+  - CNAME
+  - README.md
