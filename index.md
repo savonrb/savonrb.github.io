@@ -4,7 +4,6 @@
 
 title: Welcome
 layout: default
-nav: nav_main.md
 ---
 
 Savon is a [SOAP](http://en.wikipedia.org/wiki/SOAP) client for the [Ruby programming language](http://www.ruby-lang.org/).

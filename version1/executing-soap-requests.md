@@ -3,7 +3,6 @@ savon_version: v1
 order: 2
 title: Executing SOAP requests
 layout: default
-nav: nav_versions.md
 nav_savon_version: v1
 ---
 

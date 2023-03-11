@@ -3,7 +3,6 @@ savon_version: v1
 order: 9
 title: Alternatives
 layout: default
-nav: nav_versions.md
 nav_savon_version: v1
 ---
 

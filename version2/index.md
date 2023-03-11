@@ -1,8 +1,7 @@
 ---
 name: Version 2
 url: version2
-layout: default
-nav: nav_versions.md
+layout: guides
 nav_savon_version: v2
 ---
 
@@ -15,7 +14,6 @@ us to change the internals without breaking your code.
 
 ### Supported Ruby versions
 
-* MRI 1.8.7, 1.9.2, 1.9.3 and 2.0
-* Ruby Enterprise Edition
-* JRuby (1.8 and 1.9 mode)
-* Rubinius (1.8 and 1.9 mode)
+* `master` - MRI 2.7, 3.0, 3.1 (same support as Ruby)
+* 2.12.x - MRI 2.2, 2.3, 2.4, 2.5
+* 2.11.x - MRI 2.0, 2.1, 2.2, and 2.3
