@@ -14,6 +14,10 @@ us to change the internals without breaking your code.
 
 ### Supported Ruby versions
 
-* `main` - MRI 2.7, 3.0, 3.1 (same support as Ruby)
+Every savon release is tested with contemporary supported versions of ruby.
+
+* `main` - same support as Ruby
+* 2.15.x - MRI 3.0, 3.1, 3.2, 3.3
+* 2.13.x, 2.14.x - MRI 2.7, 3.0, 3.1
 * 2.12.x - MRI 2.2, 2.3, 2.4, 2.5
 * 2.11.x - MRI 2.0, 2.1, 2.2, and 2.3
