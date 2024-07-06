@@ -120,7 +120,7 @@ Savon.client(ssl_version: :SSLv3)  # or one of [:TLSv1, :SSLv2]
 
 #### ssl_cert_file
 
-Sets the SSL cert file to use.
+Sets the SSL cert file to use, or sets the path to the directory that contains the cert file(s).
 
 ``` ruby
 Savon.client(ssl_cert_file: "lib/client_cert.pem")
@@ -136,7 +136,7 @@ Savon.client(ssl_cert_key_file: "lib/client_key.pem")
 
 #### ssl_ca_cert_file
 
-Sets the SSL ca cert file to use.
+Sets the SSL ca cert file to use, or sets the path to the directory that contains the ca cert file(s).
 
 ``` ruby
 Savon.client(ssl_ca_cert_file: "lib/ca_cert.pem")
