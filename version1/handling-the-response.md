@@ -7,7 +7,7 @@ nav_savon_version: v1
 ---
 
 `Savon::Client#request` returns a
-[`Savon::SOAP::Response`](http://github.com/savonrb/savon/blob/master/lib/savon/soap/response.rb).
+[`Savon::SOAP::Response`](http://github.com/savonrb/savon/blob/main/lib/savon/soap/response.rb).
 Everything's really just a Hash.
 
 ``` ruby
@@ -20,7 +20,7 @@ Alright, sometimes it's XML.
 response.to_xml  # => "<response><success>true</success><name>John</name></response>"
 ```
 
-The response also contains the [`HTTPI::Response`](http://github.com/savonrb/httpi/blob/master/lib/httpi/response.rb)
+The response also contains the [`HTTPI::Response`](http://github.com/savonrb/httpi/blob/main/lib/httpi/response.rb)
 which (obviously) contains information about the HTTP response.
 
 ``` ruby

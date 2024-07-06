@@ -13,7 +13,6 @@ Savon is a [SOAP](http://en.wikipedia.org/wiki/SOAP) client for the [Ruby progra
   <li><i class="fas fa-cloud-download-alt"></i> <a href="http://rubygems.org/gems/savon">Releases</a> are available via RubyGems.org</li>
   <li><i class="far fa-comments"></i> Ask questions through the <a href="https://groups.google.com/forum/#!forum/savonrb">mailing list</a> or on <a href="http://stackoverflow.com/questions/tagged/savon">StackOverflow</a>
   </li>
-  <li><i class="fab fa-twitter"></i> And <a href="https://twitter.com/savonrb">receive updates</a> via Twitter</li>
 </ul>
 
 ## Documentation by version

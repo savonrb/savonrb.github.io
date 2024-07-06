@@ -18,7 +18,7 @@ or add it to your [Gemfile](http://gembundler.com/):
 gem 'savon', '~> 1.0'
 ```
 
-[`Savon::Client`](http://github.com/savonrb/savon/blob/master/lib/savon/client.rb) is the
+[`Savon::Client`](http://github.com/savonrb/savon/blob/main/lib/savon/client.rb) is the
 interface to your SOAP service. The easiest way to get started is to use a local or remote
 WSDL document.
 
@@ -67,7 +67,7 @@ Savon.client File.expand_path("../wsdl/ebay.xml", __FILE__)
 ```
 
 With the client set up, you can now see what Savon knows about your service through methods offered
-by [`Savon::WSDL::Document`](http://github.com/savonrb/savon/blob/master/lib/savon/wsdl/document.rb) (wsdl).
+by [`Savon::WSDL::Document`](http://github.com/savonrb/savon/blob/main/lib/savon/wsdl/document.rb) (wsdl).
 It's not too much, but it can save you some code.
 
 ``` ruby
@@ -115,7 +115,7 @@ Savon uses [HTTPI](http://rubygems.org/gems/httpi) to execute GET requests for W
 POST requests for SOAP requests. HTTPI is an interface to HTTP libraries like Curl and Net::HTTP.
 
 The library comes with a request object called
-[`HTTPI::Request`](http://github.com/savonrb/httpi/blob/master/lib/httpi/request.rb) (http)
+[`HTTPI::Request`](http://github.com/savonrb/httpi/blob/main/lib/httpi/request.rb) (http)
 which can accessed through the client. I'm only going to document a few details about it and
 then hand over to the official documentation.
 
@@ -128,7 +128,7 @@ client.http.headers["SOAPAction"] = '"urn:example#service"'
 ```
 
 If your service relies on cookies to handle sessions, you can grab the cookie from the
-[`HTTPI::Response`](http://github.com/savonrb/httpi/blob/master/lib/httpi/response.rb) and set
+[`HTTPI::Response`](http://github.com/savonrb/httpi/blob/main/lib/httpi/response.rb) and set
 it for subsequent requests.
 
 ``` ruby
@@ -137,7 +137,7 @@ client.http.headers["Cookie"] = response.http.headers["Set-Cookie"]
 
 ### WSSE authentication
 
-Savon comes with [`Savon::WSSE`](http://github.com/savonrb/savon/blob/master/lib/savon/wsse.rb) (wsse)
+Savon comes with [`Savon::WSSE`](http://github.com/savonrb/savon/blob/main/lib/savon/wsse.rb) (wsse)
 for you to use wsse:UsernameToken authentication.
 
 ``` ruby

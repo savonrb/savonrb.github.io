@@ -79,7 +79,7 @@ Notice, that the list is almost the same as the one for `Savon.client`. Except n
 additional object called soap. In contrast to the other three objects, the soap object is tied to single
 requests.
 
-[`Savon::SOAP::XML`](http://github.com/savonrb/savon/blob/master/lib/savon/soap/xml.rb) (soap) can only be
+[`Savon::SOAP::XML`](http://github.com/savonrb/savon/blob/main/lib/savon/soap/xml.rb) (soap) can only be
 accessed inside this block and Savon creates a new soap object for every request.
 
 Savon by default expects your services to be based on SOAP 1.1. For SOAP 1.2 services, you can set the

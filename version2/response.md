@@ -56,7 +56,7 @@ end
 ```
 
 These options map to Nori's options and you can find more information about how they work in
-the [README](https://github.com/savonrb/nori/blob/master/README.md).
+the [README](https://github.com/savonrb/nori/blob/main/README.md).
 
 #### #to_xml
 

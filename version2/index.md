@@ -14,6 +14,6 @@ us to change the internals without breaking your code.
 
 ### Supported Ruby versions
 
-* `master` - MRI 2.7, 3.0, 3.1 (same support as Ruby)
+* `main` - MRI 2.7, 3.0, 3.1 (same support as Ruby)
 * 2.12.x - MRI 2.2, 2.3, 2.4, 2.5
 * 2.11.x - MRI 2.0, 2.1, 2.2, and 2.3
