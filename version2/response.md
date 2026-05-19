@@ -25,13 +25,15 @@ Translates the response and returns the SOAP body as a Hash.
 response.body  # => { response: { success: true, name: "luke" } }
 ```
 
-#### #hash
+#### #full_hash
 
-Translates the response and returns it as a Hash.
+Translates the response and returns the full envelope as a Hash, including both header and body.
 
 ``` ruby
-response.hash  # => { envelope: { header: { ... }, body: { ... } } }
+response.full_hash  # => { envelope: { header: { ... }, body: { ... } } }
 ```
+
+Note: `response.hash` still works but is deprecated and will be removed in a future release.
 
 Savon uses [Nori](http://rubygems.org/gems/nori) to translate the SOAP response XML to a Hash.
 You can change how the response is translated through a couple of global and local options.
