@@ -95,6 +95,33 @@ SOAP requests.
 Savon.client(open_timeout: 5, read_timeout: 5)
 ```
 
+#### transport
+
+Defaults to `:httpi` using [HTTPI](https://rubygems.org/gems/httpi). Set to `:faraday` to use a [Faraday](https://github.com/lostisland/faraday) connection instead.
+
+``` ruby
+Savon.client(wsdl: "...", transport: :faraday)
+```
+
+When using the Faraday transport, access `client.faraday` to configure the connection before making
+any calls. It returns a `Faraday::Connection` that you configure directly:
+
+``` ruby
+client = Savon.client(wsdl: "...", transport: :faraday)
+
+conn = client.faraday
+conn.headers["Authorization"] = "Bearer token"
+conn.options.timeout = 10
+conn.ssl.verify = false
+```
+
+The Faraday transport unlocks features that HTTPI does not support: redirect following for WSDL fetches
+(via `faraday-follow-redirects`) and digest authentication (via `faraday-digestauth`).
+
+Note: httpi-specific options like `proxy`, `open_timeout`, `read_timeout`, SSL options, and `adapter`
+cannot be used alongside `transport: :faraday`. Savon will raise a helpful error if you mix them.
+Configure those through `client.faraday` instead.
+
 
 ### SSL
 
