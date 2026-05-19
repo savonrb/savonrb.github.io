@@ -3,6 +3,7 @@ name: Version 2
 url: version2
 layout: guides
 title: Overview
+savon_version: v2
 nav_savon_version: v2
 ---
 

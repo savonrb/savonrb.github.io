@@ -1,8 +1,12 @@
 ---
-
 layout: default
 ---
 
-<div>{% include nav_guides.md %}</div>
-
-{{ content }}
+<div class="guides_layout">
+  <aside class="guides_sidebar">
+    {% include nav_guides.md %}
+  </aside>
+  <div class="guides_content">
+    {{ content }}
+  </div>
+</div>
