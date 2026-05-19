@@ -343,10 +343,19 @@ end
 
 #### wsse_timestamp
 
-And activate WSSE timestamp auth.
+Adds a WS-Security timestamp to every request. Many enterprise services require this even when their documentation doesn't mention it. If you're getting authentication failures or `wsse:InvalidSecurity` faults despite correct credentials, adding this option is often the fix.
 
 ``` ruby
 Savon.client(wsse_timestamp: true)
+```
+
+Combine with `wsse_auth` when the service requires both credentials and a timestamp:
+
+``` ruby
+Savon.client(
+  wsse_auth: ["username", "password", :digest],
+  wsse_timestamp: true
+)
 ```
 
 #### ntlm
