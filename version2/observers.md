@@ -1,6 +1,6 @@
 ---
 savon_version: v2
-order: 9
+order: 10
 title: Observers
 layout: guides
 nav_savon_version: v2

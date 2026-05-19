@@ -1,6 +1,6 @@
 ---
 savon_version: v2
-order: 11
+order: 12
 title: Changes
 layout: guides
 nav_savon_version: v2

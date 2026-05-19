@@ -1,6 +1,6 @@
 ---
 savon_version: v2
-order: 6
+order: 7
 title: Response
 layout: guides
 nav_savon_version: v2

@@ -1,6 +1,6 @@
 ---
 savon_version: v2
-order: 8
+order: 9
 title: Examples
 layout: guides
 nav_savon_version: v2

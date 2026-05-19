@@ -158,9 +158,16 @@ Savon.client(ssl_cert_key_password: "secret")
 Savon tells [Gyoku](https://github.com/savonrb/gyoku) to convert SOAP message Hash key Symbols to lowerCamelcase tags.
 You can change this to CamelCase, UPCASE or completely disable any conversion.
 
+| Value | `:user_name` becomes |
+|---|---|
+| `:lower_camelcase` (default) | `<userName>` |
+| `:camelcase` | `<UserName>` |
+| `:upcase` | `<USER_NAME>` |
+| `:none` | `<user_name>` |
+
 ``` ruby
 client = Savon.client do
-  convert_request_keys_to :camelcase  # or one of [:lower_camelcase, :upcase, :none]
+  convert_request_keys_to :camelcase
 end
 
 client.call(:find_user) do
