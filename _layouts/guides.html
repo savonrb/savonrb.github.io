@@ -5,6 +5,11 @@ layout: default
 <div class="guides_layout">
   <aside class="guides_sidebar">
     {% include nav_guides.md %}
+    {% capture toc_output %}{% include toc.html html=content h_min=3 h_max=4 class="toc_nav" id="toc_container" item_class="toc_%level%" sanitize=true %}{% endcapture %}
+    {% if toc_output != '' %}
+      <p class="toc_heading">On this page</p>
+      {{ toc_output }}
+    {% endif %}
   </aside>
   <div class="guides_content">
     <h1>{{ page.title }}</h1>
