@@ -33,7 +33,21 @@ def authenticate(credentials)
   client.call(:authenticate, message: credentials)
 rescue Savon::SOAPFault => error
   fault_code = error.to_hash[:fault][:faultcode]
-  raise CustomError, fault_code
+  fault_message = error.to_hash[:fault][:faultstring]
+  raise CustomError, "#{fault_code}: #{fault_message}"
+end
+```
+
+If you'd rather check for faults without raising, set `raise_errors: false` on the client and inspect the response directly:
+
+``` ruby
+client = Savon.client(wsdl: "...", raise_errors: false)
+response = client.call(:authenticate, message: credentials)
+
+if response.soap_fault?
+  fault = response.body[:fault]
+  puts fault[:faultcode]    # e.g. "soap:Client"
+  puts fault[:faultstring]  # error message from the server
 end
 ```
 
