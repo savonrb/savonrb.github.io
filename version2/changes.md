@@ -1,7 +1,9 @@
 ---
 savon_version: v2
 order: 12
-title: Changes
+title: "2.x Changes"
+nav_title: "Changes"
+description: "Migration notes and behavior changes in Savon 2.x, including configuration, logging, hooks, Nori, Gyoku, HTTPI, errors, and response access."
 layout: guides
 nav_savon_version: v2
 ---

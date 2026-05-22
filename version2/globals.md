@@ -1,7 +1,9 @@
 ---
 savon_version: v2
 order: 2
-title: Globals
+title: "Global Options"
+nav_title: "Globals"
+description: "Reference for Savon client options covering WSDL, endpoint, headers, timeouts, SSL, authentication, logging, request XML, and response parsing."
 layout: guides
 nav_savon_version: v2
 ---

@@ -1,7 +1,9 @@
 ---
 savon_version: v2
 order: 10
-title: Observers
+title: "Observer Hooks"
+nav_title: "Observers"
+description: "Use Savon observers to hook into the request-response cycle for custom logging, monitoring, or test helpers."
 layout: guides
 nav_savon_version: v2
 ---

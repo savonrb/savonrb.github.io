@@ -1,7 +1,9 @@
 ---
 savon_version: v2
 order: 1
-title: Client
+title: "Create a SOAP Client"
+nav_title: "Client"
+description: "Create a Savon SOAP client from a WSDL URL or file, configure endpoint and namespace, and list available SOAP operations."
 layout: guides
 nav_savon_version: v2
 ---

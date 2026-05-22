@@ -1,7 +1,8 @@
 ---
 layout: guides
-title: Overview
-description: "Documentation for Savon 2.x, the Ruby SOAP client: installation, client setup, request options, responses, errors, debugging, and testing."
+title: "Ruby SOAP Client"
+nav_title: "Overview"
+description: "Savon is a Ruby SOAP client for WSDL-based integrations. Find installation, examples, API docs, releases, and support links."
 permalink: /
 savon_version: v2
 nav_savon_version: v2

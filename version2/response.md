@@ -1,7 +1,9 @@
 ---
 savon_version: v2
 order: 7
-title: Response
+title: "Read SOAP Responses"
+nav_title: "Response"
+description: "Read Savon SOAP responses as hashes or XML, access headers and bodies, use XPath, inspect HTTP responses, and handle error states."
 layout: guides
 nav_savon_version: v2
 ---

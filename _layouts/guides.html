@@ -40,8 +40,8 @@ layout: default
     {{ content }}
     {% if prev_page or next_page %}
       <nav class="guides_prevnext">
-        {% if prev_page %}<a href="{{ prev_page.url }}" class="prevnext_prev">← {{ prev_page.title }}</a>{% endif %}
-        {% if next_page %}<a href="{{ next_page.url }}" class="prevnext_next">{{ next_page.title }} →</a>{% endif %}
+        {% if prev_page %}<a href="{{ prev_page.url }}" class="prevnext_prev">← {{ prev_page.nav_title | default: prev_page.title }}</a>{% endif %}
+        {% if next_page %}<a href="{{ next_page.url }}" class="prevnext_next">{{ next_page.nav_title | default: next_page.title }} →</a>{% endif %}
       </nav>
     {% endif %}
   </div>

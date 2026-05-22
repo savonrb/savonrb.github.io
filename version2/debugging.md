@@ -1,7 +1,9 @@
 ---
 savon_version: v2
 order: 6
-title: Debugging
+title: "Debug SOAP Requests"
+nav_title: "Debugging"
+description: "Enable Savon request and response logging, pretty-print SOAP XML, filter secrets, inspect raw responses, and diagnose common SOAP failures."
 layout: guides
 nav_savon_version: v2
 ---

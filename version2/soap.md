@@ -1,7 +1,9 @@
 ---
 savon_version: v2
 order: 0
-title: SOAP & WSDL
+title: "SOAP and WSDL"
+nav_title: "SOAP & WSDL"
+description: "Learn how SOAP and WSDL work, how Savon reads a WSDL, how operation names map to Ruby symbols, and how to call services without a WSDL."
 layout: guides
 nav_savon_version: v2
 ---

@@ -1,7 +1,9 @@
 ---
 savon_version: v2
 order: 9
-title: Examples
+title: "SOAP Client Examples"
+nav_title: "Examples"
+description: "Copy-paste Savon examples for SOAP requests, WSSE authentication, key conversion, arrays, nested messages, response navigation, errors, logs, cookies, and no-WSDL calls."
 layout: guides
 nav_savon_version: v2
 ---

@@ -1,7 +1,9 @@
 ---
 savon_version: v2
 order: 5
-title: Errors
+title: "Error Handling"
+nav_title: "Errors"
+description: "Handle Savon::SOAPFault, Savon::HTTPError, and Savon::InvalidResponseError, inspect fault details, and disable automatic raising when needed."
 layout: guides
 nav_savon_version: v2
 ---

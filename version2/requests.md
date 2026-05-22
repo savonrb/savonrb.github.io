@@ -1,7 +1,9 @@
 ---
 savon_version: v2
 order: 3
-title: Requests
+title: "Calling SOAP Operations"
+nav_title: "Requests"
+description: "Use client.call to invoke SOAP operations in Savon and pass message hashes, headers, SOAP actions, and local request options."
 layout: guides
 nav_savon_version: v2
 ---

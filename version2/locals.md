@@ -1,7 +1,9 @@
 ---
 savon_version: v2
 order: 4
-title: Locals
+title: "Local Options"
+nav_title: "Locals"
+description: "Per-request options for Savon SOAP calls, including SOAP action, cookies, message hashes, XML attributes, raw XML, and response parsing."
 layout: guides
 nav_savon_version: v2
 ---

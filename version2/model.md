@@ -1,7 +1,9 @@
 ---
 savon_version: v2
 order: 8
-title: Model
+title: "Savon::Model Guide"
+nav_title: "Model"
+description: "Use Savon::Model to define SOAP clients and operations on Ruby classes with shared client configuration and request methods."
 layout: guides
 nav_savon_version: v2
 ---

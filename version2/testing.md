@@ -1,7 +1,9 @@
 ---
 savon_version: v2
 order: 11
-title: Testing
+title: "Testing SOAP Integrations"
+nav_title: "Testing"
+description: "Mock SOAP responses in Ruby tests with Savon::SpecHelper and verify request messages without calling a live SOAP service."
 layout: guides
 nav_savon_version: v2
 ---
