@@ -2,6 +2,30 @@
 layout: default
 ---
 
+{% assign nav_pages = site.pages | where: 'savon_version', page.nav_savon_version | sort: "order" %}
+
+{% assign found_current = false %}
+{% for p in nav_pages %}
+  {% if found_current == false and p.url != page.url %}
+    {% assign prev_page = p %}
+  {% endif %}
+  {% if p.url == page.url %}
+    {% assign found_current = true %}
+  {% endif %}
+{% endfor %}
+
+{% assign found_current = false %}
+{% assign next_captured = false %}
+{% for p in nav_pages %}
+  {% if found_current and next_captured == false %}
+    {% assign next_page = p %}
+    {% assign next_captured = true %}
+  {% endif %}
+  {% if p.url == page.url %}
+    {% assign found_current = true %}
+  {% endif %}
+{% endfor %}
+
 <div class="guides_layout">
   <aside class="guides_sidebar">
     {% include nav_guides.md %}
@@ -14,5 +38,11 @@ layout: default
   <div class="guides_content">
     <h1>{{ page.title }}</h1>
     {{ content }}
+    {% if prev_page or next_page %}
+      <nav class="guides_prevnext">
+        {% if prev_page %}<a href="{{ prev_page.url }}" class="prevnext_prev">← {{ prev_page.title }}</a>{% endif %}
+        {% if next_page %}<a href="{{ next_page.url }}" class="prevnext_next">{{ next_page.title }} →</a>{% endif %}
+      </nav>
+    {% endif %}
   </div>
 </div>
