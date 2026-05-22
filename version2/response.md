@@ -11,7 +11,7 @@ nav_savon_version: v2
 
 The response provides a few convenience methods for you to work with the XML in any way you want.
 
-#### #header
+## #header
 
 Translates the response and returns the SOAP header as a Hash.
 
@@ -19,7 +19,7 @@ Translates the response and returns the SOAP header as a Hash.
 response.header  # => { token: "secret" }
 ```
 
-#### #body
+## #body
 
 Translates the response and returns the SOAP body as a Hash.
 
@@ -27,7 +27,7 @@ Translates the response and returns the SOAP body as a Hash.
 response.body  # => { response: { success: true, name: "luke" } }
 ```
 
-#### #full_hash
+## #full_hash
 
 Translates the response and returns the full envelope as a Hash, including both header and body.
 
@@ -62,7 +62,7 @@ end
 These options map to Nori's options and you can find more information about how they work in
 the [README](https://github.com/savonrb/nori/blob/main/README.md).
 
-#### #to_xml
+## #to_xml
 
 Returns the raw SOAP response.
 
@@ -70,7 +70,7 @@ Returns the raw SOAP response.
 response.to_xml  # => "<response><success>true</success><name>luke</name></response>"
 ```
 
-#### #doc
+## #doc
 
 Returns the SOAP response as a [Nokogiri](http://nokogiri.org/) document.
 
@@ -78,7 +78,7 @@ Returns the SOAP response as a [Nokogiri](http://nokogiri.org/) document.
 response.doc  # => #<Nokogiri::XML::Document:0x1017b4268 ...
 ```
 
-#### #xpath
+## #xpath
 
 Delegates to [Nokogiri's xpath method](http://nokogiri.org/Nokogiri/XML/Node.html#method-i-xpath).
 
@@ -86,7 +86,7 @@ Delegates to [Nokogiri's xpath method](http://nokogiri.org/Nokogiri/XML/Node.htm
 response.xpath("//v1:authenticateResponse/return/success").first.inner_text.should == "true"
 ```
 
-#### #http
+## #http
 
 Returns the [HTTPI](https://github.com/savonrb/httpi) response.
 

@@ -11,9 +11,9 @@ nav_savon_version: v2
 
 Local options are passed to the client's `#call` method and are specific to a single request.
 
-### HTTP
+## HTTP
 
-#### soap_action
+### soap_action
 
 You might need to set this if you don't have a WSDL. Otherwise, Savon should set the proper SOAPAction HTTP header for you.
 If it doesn't, please open an issue and add the WSDL of your service.
@@ -22,7 +22,7 @@ If it doesn't, please open an issue and add the WSDL of your service.
 client.call(:authenticate, soap_action: "urn:Authenticate")
 ```
 
-#### cookies
+### cookies
 
 Savon 2.0 tried to automatically handle cookies by storing the cookies from the last response and using them for
 the next request. This is wrong and [it caused problems](https://github.com/savonrb/savon/issues/363). Savon 2.1
@@ -39,9 +39,9 @@ This option accepts an Array of `HTTPI::Cookie` objects or any object that respo
 (like for example, an `HTTPI::Response`).
 
 
-### Request
+## Request
 
-#### message
+### message
 
 You probably want to add some arguments to your request. For simple XML which can easily be represented as a Hash,
 you can pass the SOAP message as a Hash. Savon uses [Gyoku](https://github.com/savonrb/gyoku) to translate the Hash
@@ -74,7 +74,7 @@ end
 client.call(:authenticate, message: ServiceRequest.new)
 ```
 
-#### message_tag
+### message_tag
 
 You can change the name of the SOAP message tag. If you need to use this option, please open an issue let me know why.
 
@@ -96,7 +96,7 @@ operation name. Here's how the option changes the request.
 </env:Envelope>
 ```
 
-#### attributes
+### attributes
 
 The attributes option accepts a Hash of XML attributes for the SOAP message tag.
 
@@ -120,7 +120,7 @@ Here's what the request will look like.
 If you need to use this option, please open an issue and provide you WSDL for debugging.
 This should be handled automatically, but we need real world examples to do so.
 
-#### soap_header
+### soap_header
 
 Since v2.3.0 you can specify the SOAP header per request. When both the global and local
 option is used, Savon will merge the global with the local Hash.
@@ -129,7 +129,7 @@ option is used, Savon will merge the global with the local Hash.
 client.call(:authenticate, :soap_header => { "OpToken" => "secret" })
 ```
 
-#### xml
+### xml
 
 If you need to, you can even shortcut Savon's Builder and send your very own XML.
 
@@ -138,9 +138,9 @@ client.call(:authenticate, xml: "<envelope><body></body></envelope>")
 ```
 
 
-### Response
+## Response
 
-#### advanced_typecasting
+### advanced_typecasting
 
 Savon by default tells [Nori](https://github.com/savonrb/nori) to use its "advanced typecasting" to convert XML values like
 `"true"` to `TrueClass`, dates to date objects, etc.
@@ -149,7 +149,7 @@ Savon by default tells [Nori](https://github.com/savonrb/nori) to use its "advan
 client.call(:authenticate, advanced_typecasting: false)
 ```
 
-#### response_parser
+### response_parser
 
 Savon defaults to [Nori's](https://github.com/savonrb/nori) Nokogiri parser. Nori ships with a REXML parser as an alternative.
 If you need to switch to REXML, please open an issue and describe the problem you have with the Nokogiri parser.

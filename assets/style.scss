@@ -216,25 +216,31 @@ header {
   margin: 0 0 2rem 0;
 }
 
-header h1 {
+#a-title,
+#a-title:hover {
+  text-decoration: none;
+}
+
+header .site_title {
+  display: block;
   font-family: var(--font-heading);
   font-size: 1.4rem;
   font-weight: 700;
   color: var(--color-heading);
-  letter-spacing: -0.01em;
+  letter-spacing: 0;
   line-height: 0.9;
   margin: 0;
 }
 
-header h1::before {
+header .site_title::before {
   content: '';
 }
 
-header h2 {
+header .site_tagline {
   font-family: var(--font-body);
   font-size: 0.85rem;
   font-weight: 400;
-  letter-spacing: 0.02em;
+  letter-spacing: 0;
   color: var(--color-muted);
   margin: 0.25rem 0 0;
 }
@@ -397,7 +403,7 @@ header h2 {
   padding: 0;
 }
 
-.toc_3 > a {
+.toc_2 > a {
   display: block;
   padding: 0.25rem 0.75rem 0.1rem;
   text-decoration: none;
@@ -407,12 +413,12 @@ header h2 {
   color: var(--color-subtle);
 }
 
-.toc_3 > a:hover {
+.toc_2 > a:hover {
   border-left-color: var(--color-accent);
   color: var(--color-text);
 }
 
-.toc_4 > a {
+.toc_3 > a {
   display: block;
   padding: 0.15rem 0.75rem 0.2rem 1.25rem;
   border-left: 2px solid transparent;
@@ -421,7 +427,7 @@ header h2 {
   color: var(--color-subtle);
 }
 
-.toc_4 > a:hover {
+.toc_3 > a:hover {
   border-left-color: var(--color-accent);
   color: var(--color-text);
 }

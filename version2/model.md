@@ -12,7 +12,7 @@ nav_savon_version: v2
 `Savon::Model` can be used to model a class interface on top of a SOAP service. Extending any class
 with this module will give you three class methods to configure the service model.
 
-#### .client
+## .client
 
 Sets up the client instance used by the class.
 
@@ -29,7 +29,7 @@ class User
 end
 ```
 
-#### .global
+## .global
 
 Sets a global option to a given value.
 
@@ -47,7 +47,7 @@ class User
 end
 ```
 
-#### .operations
+## .operations
 
 Defines class and instance methods for the given SOAP operations.
 

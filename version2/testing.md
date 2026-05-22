@@ -71,7 +71,7 @@ end
 As you can see in this example, you have to explicitly set Savon in and out of mock mode before and after
 your specs. The example uses RSpec's `before` and `after` hooks for that.
 
-#### Expectations
+## Expectations
 
 Are specified through the `#expects` method on the `savon` mock interface. It takes the
 name of a SOAP operation that is expected to be called.
@@ -80,7 +80,7 @@ name of a SOAP operation that is expected to be called.
 savon.expects(:authenticate)
 ```
 
-#### Options
+## Options
 
 Can be tested through the `#with` method. This currently only supports checking the SOAP message,
 but can easily be changed to support any global and or local option along with the generated request XML.
@@ -95,7 +95,7 @@ message = { username: "luke", password: "secret" }
 savon.expects(:authenticate).with(message: message)
 ```
 
-#### Fixtures
+## Fixtures
 
 Should match a recorded SOAP response from the server for the request you're testing.
 The `#returns` method accepts a few options which are used to create an HTTPI response.

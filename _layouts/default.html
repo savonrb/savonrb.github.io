@@ -18,9 +18,9 @@
         <div class="header_inner">
           <div class="header_title">
             <a id="a-title" href="{{ '/' | relative_url }}">
-              <h1>{{ site.title | default: site.github.repository_name }}</h1>
+              <span class="site_title">{{ site.title | default: site.github.repository_name }}</span>
             </a>
-            <h2>{{ site.description | default: site.github.project_tagline }}</h2>
+            <p class="site_tagline">{{ site.description | default: site.github.project_tagline }}</p>
           </div>
           <section id="downloads">
             <a href="{{ site.github.repository_url | default: 'https://github.com/savonrb/savon' }}" class="btn btn-github"><i class="fa-brands fa-github"></i> GitHub</a>

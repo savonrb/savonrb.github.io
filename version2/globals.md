@@ -14,7 +14,9 @@ Although they are called "global options", they really are local to a client ins
 based on a global `Savon.configure` method to store the configuration. While this was a popular concept
 back then, adapted by tons of libraries, its problem is global state. I tried to fix that problem.
 
-#### wsdl
+## Service setup
+
+### wsdl
 
 Savon accepts either a local or remote WSDL document which it uses to extract information like the SOAP
 endpoint and target namespace of the service. Alternatively, you can set the WSDL as a String.
@@ -28,7 +30,7 @@ Savon.client(wsdl: File.read("/Users/me/project/service.wsdl"))
 For learning how to read a WSDL document, read the [Beginner's Guide](http://predic8.com/wsdl-reading.htm) by Thomas Bayer.
 It's a good idea to know what you're working with and this might really help you debug certain problems.
 
-#### endpoint and namespace
+### endpoint and namespace
 
 In case your service doesn't offer a WSDL, you need to tell Savon about the SOAP endpoint and target
 namespace of the service.
@@ -61,7 +63,7 @@ of a WSDL, as the `location` attribute of a `soap:address` node.
 
 You can also use these options to overwrite these values in a WDSL document in case you need to.
 
-#### raise_errors
+### raise_errors
 
 By default, Savon raises SOAP fault and HTTP errors. You can disable both errors and query the response instead.
 
@@ -70,9 +72,9 @@ Savon.client(raise_errors: false)
 ```
 
 
-### HTTP
+## HTTP
 
-#### proxy
+### proxy
 
 You can specify a proxy server to use. This will be used for retrieving remote WSDL documents and actual SOAP requests.
 
@@ -80,7 +82,7 @@ You can specify a proxy server to use. This will be used for retrieving remote W
 Savon.client(proxy: "http://example.org")
 ```
 
-#### headers
+### headers
 
 Additional HTTP headers for the request.
 
@@ -88,7 +90,7 @@ Additional HTTP headers for the request.
 Savon.client(headers: { "Authentication" => "secret" })
 ```
 
-#### timeouts
+### timeouts
 
 Both open and read timeout can be set (in seconds). This will be used for retrieving remote WSDL documents and actually
 SOAP requests.
@@ -97,7 +99,7 @@ SOAP requests.
 Savon.client(open_timeout: 5, read_timeout: 5)
 ```
 
-#### transport
+### transport
 
 Defaults to `:httpi` using [HTTPI](https://rubygems.org/gems/httpi). Set to `:faraday` to use a [Faraday](https://github.com/lostisland/faraday) connection instead.
 
@@ -125,13 +127,13 @@ cannot be used alongside `transport: :faraday`. Savon will raise a helpful error
 Configure those through `client.faraday` instead.
 
 
-### SSL
+## SSL
 
 Unfortunately, SSL options were [missing from the initial 2.0 release](https://github.com/savonrb/savon/issues/344).
 Please update to at least version 2.0.2 to use the following options. These will be used for retrieving remote WSDL
 documents and actual SOAP requests.
 
-#### ssl_verify_mode
+### ssl_verify_mode
 
 You can disable SSL verification if you know what you're doing.
 
@@ -139,7 +141,7 @@ You can disable SSL verification if you know what you're doing.
 Savon.client(ssl_verify_mode: :none)
 ```
 
-#### ssl_version
+### ssl_version
 
 Change the SSL version to use.
 
@@ -147,7 +149,7 @@ Change the SSL version to use.
 Savon.client(ssl_version: :SSLv3)  # or one of [:TLSv1, :SSLv2]
 ```
 
-#### ssl_cert_file
+### ssl_cert_file
 
 Sets the SSL cert file to use, or sets the path to the directory that contains the cert file(s).
 
@@ -155,7 +157,7 @@ Sets the SSL cert file to use, or sets the path to the directory that contains t
 Savon.client(ssl_cert_file: "lib/client_cert.pem")
 ```
 
-#### ssl_cert_key_file
+### ssl_cert_key_file
 
 Sets the SSL cert key file to use.
 
@@ -163,7 +165,7 @@ Sets the SSL cert key file to use.
 Savon.client(ssl_cert_key_file: "lib/client_key.pem")
 ```
 
-#### ssl_ca_cert_file
+### ssl_ca_cert_file
 
 Sets the SSL ca cert file to use, or sets the path to the directory that contains the ca cert file(s).
 
@@ -171,7 +173,7 @@ Sets the SSL ca cert file to use, or sets the path to the directory that contain
 Savon.client(ssl_ca_cert_file: "lib/ca_cert.pem")
 ```
 
-#### ssl_cert_key_password
+### ssl_cert_key_password
 
 Sets the cert key password to decrypt an encrypted private key.
 
@@ -180,9 +182,9 @@ Savon.client(ssl_cert_key_password: "secret")
 ```
 
 
-### Request
+## Request
 
-#### convert_request_keys_to
+### convert_request_keys_to
 
 Savon tells [Gyoku](https://github.com/savonrb/gyoku) to convert SOAP message Hash key Symbols to lowerCamelcase tags.
 You can change this to CamelCase, UPCASE or completely disable any conversion.
@@ -218,7 +220,7 @@ This example converts all keys in the request Hash to CamelCase tags.
 </env:Envelope>
 ```
 
-#### soap_header
+### soap_header
 
 If you need to add custom XML to the SOAP header, you can use this option. This might be useful for setting a global
 authentication token or any other kind of metadata.
@@ -239,7 +241,7 @@ This is the header created for the options:
 </env:Envelope>
 ```
 
-#### element_form_default
+### element_form_default
 
 Savon should extract whether to qualify elements from the WSDL. If there is no WSDL, Savon defaults to `:unqualified`.
 
@@ -251,7 +253,7 @@ imports its type definitions from another file, the `element_form_default` value
 Savon.client(element_form_default: :qualified)
 ```
 
-#### env_namespace
+### env_namespace
 
 Savon defaults to use `:env` as the namespace identifier for the SOAP envelope. If that doesn't work  for you, I would
 like to know why. So please open an issue and make sure to add your WSDL for debugging.
@@ -267,7 +269,7 @@ This is how the request's `envelope` looks like after changing the namespace ide
   xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/">
 ```
 
-#### namespace_identifier
+### namespace_identifier
 
 Should be extracted from the WSDL. If it doesn't have a WSDL, Savon falls back to `:wsdl`. No idea why anyone
 would need to use this option.
@@ -288,7 +290,7 @@ Notice the `v1:authenticate` message tag in the generated request:
 </env:Envelope>
 ```
 
-#### namespaces
+### namespaces
 
 You can add additional namespaces to the SOAP envelope tag.
 
@@ -314,7 +316,7 @@ your WSDL for debugging.
 </env:Envelope>
 ```
 
-#### encoding
+### encoding
 
 Savon defaults to UTF-8.
 
@@ -334,7 +336,7 @@ and the XML instruction:
 <?xml version="1.0" encoding="UTF-16"?>
 ```
 
-#### soap_version
+### soap_version
 
 Defaults to SOAP 1.1. Can be set to SOAP 1.2 to use a different SOAP endpoint.
 
@@ -343,11 +345,11 @@ Savon.client(soap_savon_version: v2)
 ```
 
 
-### Authentication
+## Authentication
 
 HTTP authentication will be used for retrieving remote WSDL documents and actual SOAP requests.
 
-#### basic_auth
+### basic_auth
 
 Savon supports HTTP basic authentication.
 
@@ -355,7 +357,7 @@ Savon supports HTTP basic authentication.
 Savon.client(basic_auth: ["luke", "secret"])
 ```
 
-#### digest_auth
+### digest_auth
 
 And HTTP digest authentication. If you wish to use digest auth you must ensure that you have included the gem httpclient, or another one of the [HTTPI](https://github.com/savonrb/httpi) adapters that supports HTTP digest authentication.  Failing to do so will not produce errors, but if the HTTPI adapter ends up using net_http, digest authentication will not be performed.
 
@@ -365,7 +367,7 @@ Savon.client do
 end
 ```
 
-#### wsse_auth
+### wsse_auth
 
 As well as WSSE basic/digest auth.
 
@@ -377,7 +379,7 @@ Savon.client do
 end
 ```
 
-#### wsse_timestamp
+### wsse_timestamp
 
 Adds a WS-Security timestamp to every request. Many enterprise services require this even when their documentation doesn't mention it. If you're getting authentication failures or `wsse:InvalidSecurity` faults despite correct credentials, adding this option is often the fix.
 
@@ -394,7 +396,7 @@ Savon.client(
 )
 ```
 
-#### ntlm
+### ntlm
 
 HTTPI v2.1.0 supports [NTLM authentication](http://httpirb.com/#authentication) through its `:net_http` adapter.
 The optional third argument allows you to specify a domain. If the domain is omitted, it is assumed
@@ -406,9 +408,9 @@ Savon.client(ntlm: ["username", "password", "domain"])
 ```
 
 
-### Response
+## Response
 
-#### strip_namespaces
+### strip_namespaces
 
 Savon configures [Nori](https://github.com/savonrb/nori) to strip any namespace identifiers from the response.
 If that causes problems for you, you can disable this behavior.
@@ -423,7 +425,7 @@ Here's how the response Hash would look like if namespaces were not stripped fro
 response.hash["soap:envelope"]["soap:body"]["ns2:authenticate_response"]
 ```
 
-#### convert_response_tags_to
+### convert_response_tags_to
 
 Savon tells [Nori](https://github.com/savonrb/nori) to convert any XML tag from the response to a snakecase Symbol.
 This is why accessing the response as a Hash looks natural:
@@ -447,9 +449,9 @@ response.body["USER_RESPONSE"]["ID"]
 ```
 
 
-### Logging
+## Logging
 
-#### logger
+### logger
 
 Savon logs to `$stdout` using Ruby's default Logger. Can be changed to any compatible logger.
 
@@ -457,7 +459,7 @@ Savon logs to `$stdout` using Ruby's default Logger. Can be changed to any compa
 Savon.client(logger: Rails.logger)
 ```
 
-#### log_level
+### log_level
 
 Can be used to limit the amount of log messages by increasing the severity.
 Translates the Logger's integer values to Symbols for developer happiness.
@@ -466,7 +468,7 @@ Translates the Logger's integer values to Symbols for developer happiness.
 Savon.client(log_level: :info)  # or one of [:debug, :warn, :error, :fatal]
 ```
 
-#### log
+### log
 
 Specifies whether Savon should log requests or not. Silences HTTPI as well.
 
@@ -474,7 +476,7 @@ Specifies whether Savon should log requests or not. Silences HTTPI as well.
 Savon.client(log: false)
 ```
 
-#### filters
+### filters
 
 Sensitive information should probably be removed from logs. If you don't have a central way of filtering your logs,
 you can tell Savon about the message parameters to filter for you.
@@ -498,7 +500,7 @@ This filters the password in both the request and response.
 </env:Envelope>
 ```
 
-#### pretty_print_xml
+### pretty_print_xml
 
 Pretty print the request and response XML in your logs for debugging purposes.
 
