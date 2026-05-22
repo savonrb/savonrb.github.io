@@ -9,25 +9,24 @@
     <link rel="stylesheet" href="{{ '/fontawesome/css/solid.min.css?v=' | append: site.github.build_revision | relative_url }}">
     <link rel="stylesheet" href="{{ '/fontawesome/css/brands.min.css?v=' | append: site.github.build_revision | relative_url }}">
     {% include head-custom.html %}
-
-{% seo %}
+    {% seo %}
   </head>
 
   <body>
-
     <header>
       <div class="container">
-        <a id="a-title" href="{{ '/' | relative_url }}">
-          <h1>{{ site.title | default: site.github.repository_name }}</h1>
-        </a>
-        <h2>{{ site.description | default: site.github.project_tagline }}</h2>
-
-        <section id="downloads">
-          {% if site.show_downloads %}
-            <a href="{{ site.github.zip_url }}" class="btn">Download as .zip</a>
-            <a href="{{ site.github.tar_url }}" class="btn">Download as .tar.gz</a>
-          {% endif %}
-        </section>
+        <div class="header_inner">
+          <div class="header_title">
+            <a id="a-title" href="{{ '/' | relative_url }}">
+              <h1>{{ site.title | default: site.github.repository_name }}</h1>
+            </a>
+            <h2>{{ site.description | default: site.github.project_tagline }}</h2>
+          </div>
+          <section id="downloads">
+            <a href="{{ site.github.repository_url | default: 'https://github.com/savonrb/savon' }}" class="btn btn-github"><i class="fa-brands fa-github"></i> GitHub</a>
+            <a href="https://rubygems.org/gems/savon" class="btn"><i class="fa-solid fa-gem"></i> RubyGems</a>
+          </section>
+        </div>
       </div>
     </header>
 
@@ -35,27 +34,28 @@
       <section id="main_content">
         {{ content }}
       </section>
-      <section>
-        <div class="footer">
-          <div class="footer_hero">Savon</div>
-          <div class="footer_element">
-            Read
-            <a href="https://www.rubydoc.info/gems/savon/">Documentation</a>
-            <a href="https://github.com/savonrb/savon/blob/main/CHANGELOG.md">Changelog</a>
-            <a href="http://rubygems.org/gems/savon">Releases</a>
-          </div>
-          <div class="footer_element">
-            Contribute
-            <a href="https://github.com/savonrb/savon">Source Code</a>
-            <a href="https://github.com/savonrb/savon/issues">Issues</a>
-            <a href="https://stackoverflow.com/questions/tagged/savon">StackOverflow</a>
-          </div>
-          <div class="footer_element">
-            Maintainers
-            <a href="https://www.petercai.com">Peter Cai</a>
-          </div>
+      <footer class="footer">
+        <div class="footer_hero">
+          <span class="footer_name">Savon</span>
+          <span class="footer_tagline">{{ site.description }}</span>
         </div>
-      </section>
+        <div class="footer_element">
+          <p class="footer_label">Read</p>
+          <a href="https://www.rubydoc.info/gems/savon/">Documentation</a>
+          <a href="https://github.com/savonrb/savon/blob/main/CHANGELOG.md">Changelog</a>
+          <a href="http://rubygems.org/gems/savon">Releases</a>
+        </div>
+        <div class="footer_element">
+          <p class="footer_label">Contribute</p>
+          <a href="https://github.com/savonrb/savon">Source Code</a>
+          <a href="https://github.com/savonrb/savon/issues">Issues</a>
+          <a href="https://stackoverflow.com/questions/tagged/savon">StackOverflow</a>
+        </div>
+        <div class="footer_element">
+          <p class="footer_label">Maintainers</p>
+          <a href="https://www.petercai.com">Peter Cai</a>
+        </div>
+      </footer>
     </div>
   </body>
 </html>
