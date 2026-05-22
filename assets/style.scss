@@ -228,8 +228,8 @@ header .site_title {
   font-weight: 700;
   color: var(--color-heading);
   letter-spacing: 0;
-  line-height: 0.9;
-  margin: 0;
+  line-height: 0.95;
+  margin: 0.25rem 0 0;
 }
 
 header .site_title::before {
@@ -242,7 +242,7 @@ header .site_tagline {
   font-weight: 400;
   letter-spacing: 0;
   color: var(--color-muted);
-  margin: 0.25rem 0 0;
+  margin: 0;
 }
 
 .header_inner {
