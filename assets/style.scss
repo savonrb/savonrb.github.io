@@ -330,6 +330,71 @@ header .site_tagline {
   min-width: 0;
 }
 
+// --- Homepage docs cards ---
+
+.home_docs_grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 15rem), 1fr));
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.home_docs_card {
+  display: flex;
+  flex-direction: column;
+  min-height: 12rem;
+  padding: 1rem;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  transition: border-color 120ms ease, background-color 120ms ease;
+}
+
+.home_docs_card:hover,
+.home_docs_card:focus-within {
+  border-color: var(--color-accent);
+}
+
+.home_docs_card h3 {
+  font-size: 1rem;
+  line-height: 1.25;
+  margin: 0;
+}
+
+.home_docs_card h3 a {
+  color: var(--color-heading);
+  text-decoration: none;
+}
+
+.home_docs_card h3 a:hover {
+  color: var(--color-accent-hover);
+  text-decoration: none;
+}
+
+.home_docs_card p {
+  color: var(--color-subtle);
+  font-size: 0.95rem;
+  line-height: 1.55;
+  margin: 0.7rem 0 1rem;
+}
+
+.home_docs_links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem 0.85rem;
+  margin-top: auto;
+}
+
+.home_docs_card .home_docs_links a {
+  font-size: 0.875rem;
+  font-weight: 500;
+  text-decoration: none;
+}
+
+.home_docs_card .home_docs_links a:hover {
+  text-decoration: none;
+}
+
 // --- Sidebar nav ---
 
 .sidebar_version {

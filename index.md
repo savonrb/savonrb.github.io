@@ -23,80 +23,85 @@ gem 'savon', '~> 2.17'
 
 ## What's in the docs
 
-### SOAP & WSDL
+<div class="home_docs_grid">
+  <article class="home_docs_card">
+    <h3 class="no_toc"><a href="/version2/soap">SOAP &amp; WSDL</a></h3>
+    <p>New to SOAP? Start here. Explains what SOAP is, what a WSDL document contains, how Savon reads it, and what to do when you don't have one.</p>
+    <p class="home_docs_links"><a href="/version2/soap">SOAP &amp; WSDL →</a></p>
+  </article>
 
-New to SOAP? Start here. Explains what SOAP is, what a WSDL document contains, how Savon reads it, and what to do when you don't have one.
+  <article class="home_docs_card">
+    <h3 class="no_toc"><a href="/version2/client">Client</a></h3>
+    <p>How to create a client from a WSDL URL or file, use the block interface, and list available operations.</p>
+    <p class="home_docs_links"><a href="/version2/client">Client →</a></p>
+  </article>
 
-[SOAP & WSDL →](/version2/soap)
+  <article class="home_docs_card">
+    <h3 class="no_toc"><a href="/version2/globals">Global options</a></h3>
+    <p>Options passed to <code>Savon.client</code> that apply to all requests. They cover authentication, logging, SSL, timeouts, response parsing, request building, and transport.</p>
+    <p class="home_docs_links"><a href="/version2/globals">Globals →</a></p>
+  </article>
 
-### Client
+  <article class="home_docs_card">
+    <h3 class="no_toc"><a href="/version2/globals#authentication">Authentication</a></h3>
+    <p>Savon supports HTTP basic, digest, and NTLM authentication, plus WS-Security (WSSE) with username/password, digest, and timestamp.</p>
+    <p class="home_docs_links"><a href="/version2/globals#authentication">Authentication →</a></p>
+  </article>
 
-How to create a client from a WSDL URL or file, use the block interface, and list available operations.
+  <article class="home_docs_card">
+    <h3 class="no_toc"><a href="/version2/requests">Building requests</a></h3>
+    <p>How to call an operation and structure the message hash. Local options let you override globals per request and pass raw XML when you need full control.</p>
+    <p class="home_docs_links">
+      <a href="/version2/requests">Requests →</a>
+      <a href="/version2/locals">Local options →</a>
+    </p>
+  </article>
 
-[Client →](/version2/client)
+  <article class="home_docs_card">
+    <h3 class="no_toc"><a href="/version2/response">Reading responses</a></h3>
+    <p>The response body comes back as a nested Hash with snake_case symbol keys. You can also access raw XML, query with XPath, and inspect the HTTP response directly.</p>
+    <p class="home_docs_links"><a href="/version2/response">Response →</a></p>
+  </article>
 
-### Global options
+  <article class="home_docs_card">
+    <h3 class="no_toc"><a href="/version2/errors">Error handling</a></h3>
+    <p>Savon raises on SOAP faults and HTTP errors by default. This page covers the three exception classes, how to read fault details, and how to handle errors manually.</p>
+    <p class="home_docs_links"><a href="/version2/errors">Errors →</a></p>
+  </article>
 
-Options passed to `Savon.client` that apply to all requests. They cover authentication, logging, SSL, timeouts, response parsing, request building, and transport.
+  <article class="home_docs_card">
+    <h3 class="no_toc"><a href="/version2/debugging">Debugging</a></h3>
+    <p>How to enable logging, inspect raw envelopes, filter sensitive values from logs, and diagnose common failures.</p>
+    <p class="home_docs_links"><a href="/version2/debugging">Debugging →</a></p>
+  </article>
 
-[Globals →](/version2/globals)
+  <article class="home_docs_card">
+    <h3 class="no_toc"><a href="/version2/testing">Testing</a></h3>
+    <p>Mocking SOAP responses in tests without hitting a real service, using <code>Savon::SpecHelper</code>.</p>
+    <p class="home_docs_links"><a href="/version2/testing">Testing →</a></p>
+  </article>
 
-### Authentication
+  <article class="home_docs_card">
+    <h3 class="no_toc"><a href="/version2/observers">Observers</a></h3>
+    <p>Hooks into the request-response cycle for custom logging or monitoring.</p>
+    <p class="home_docs_links"><a href="/version2/observers">Observers →</a></p>
+  </article>
 
-Savon supports HTTP basic, digest, and NTLM authentication, plus WS-Security (WSSE) with username/password, digest, and timestamp. See the authentication section of the globals page.
+  <article class="home_docs_card">
+    <h3 class="no_toc"><a href="/version2/model">Savon::Model</a></h3>
+    <p>A module that adds a SOAP client DSL to your own classes.</p>
+    <p class="home_docs_links"><a href="/version2/model">Model →</a></p>
+  </article>
 
-[Authentication →](/version2/globals)
+  <article class="home_docs_card">
+    <h3 class="no_toc"><a href="/version2/examples">Examples</a></h3>
+    <p>Focused, copy-pasteable snippets for common patterns: key conversion, nested messages, arrays, response navigation, error handling, and more.</p>
+    <p class="home_docs_links"><a href="/version2/examples">Examples →</a></p>
+  </article>
 
-### Building requests
-
-How to call an operation and structure the message hash. Local options let you override globals per request and pass raw XML when you need full control.
-
-[Requests →](/version2/requests) | [Local options →](/version2/locals)
-
-### Reading responses
-
-The response body comes back as a nested Hash with snake_case symbol keys. You can also access raw XML, query with XPath, and inspect the HTTP response directly.
-
-[Response →](/version2/response)
-
-### Error handling
-
-Savon raises on SOAP faults and HTTP errors by default. This page covers the three exception classes, how to read fault details, and how to handle errors manually.
-
-[Errors →](/version2/errors)
-
-### Debugging
-
-How to enable logging, inspect raw envelopes, filter sensitive values from logs, and diagnose common failures.
-
-[Debugging →](/version2/debugging)
-
-### Testing
-
-Mocking SOAP responses in tests without hitting a real service, using `Savon::SpecHelper`.
-
-[Testing →](/version2/testing)
-
-### Observers
-
-Hooks into the request-response cycle for custom logging or monitoring.
-
-[Observers →](/version2/observers)
-
-### Savon::Model
-
-A module that adds a SOAP client DSL to your own classes.
-
-[Model →](/version2/model)
-
-### Examples
-
-Focused, copy-pasteable snippets for common patterns: key conversion, nested messages, arrays, response navigation, error handling, and more.
-
-[Examples →](/version2/examples)
-
-### Changes
-
-Release notes for each version.
-
-[Changes →](/version2/changes)
+  <article class="home_docs_card">
+    <h3 class="no_toc"><a href="/version2/changes">Changes</a></h3>
+    <p>Release notes for each version.</p>
+    <p class="home_docs_links"><a href="/version2/changes">Changes →</a></p>
+  </article>
+</div>
