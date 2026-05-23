@@ -22,7 +22,7 @@ require "savon"
 class AuthenticationService
 
   def initialize
-    @client = Savon.client(wsdl: "http://example.com?wsdl")
+    @client = Savon.client(wsdl: "https://example.com?wsdl")
   end
 
   def authenticate(message)

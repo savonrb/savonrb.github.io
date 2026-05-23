@@ -8,13 +8,13 @@ layout: guides
 nav_savon_version: v2
 ---
 
-Install Savon via [RubyGems.org](http://rubygems.org/gems/savon):
+Install Savon via [RubyGems.org](https://rubygems.org/gems/savon):
 
 ``` bash
 gem install savon --version '~> 2.0'
 ```
 
-or add it to your [Gemfile](http://gembundler.com/):
+or add it to your [Gemfile](https://bundler.io/man/gemfile.5.html):
 
 ``` ruby
 gem 'savon', '~> 2.0'
@@ -23,20 +23,19 @@ gem 'savon', '~> 2.0'
 The new client is supposed be a lot simpler to use, because everything in Savon 2.0 is based on a defined set
 of global and local options. To create a new client based on a WSDL document, you could set the global `:wsdl`
 option by passing a Hash to the `Savon.client` "factory method". The client's constructor accepts various
-[global options](#globals) which are specific to a service.
+[global options](/version2/globals.html) which are specific to a service.
 
 ``` ruby
-client = Savon.client(wsdl: "http://example.com?wsdl")
+client = Savon.client(wsdl: "https://example.com?wsdl")
 ```
 
 Along with the simple Hash-based interface, Savon also comes with an interface based on blocks. This should look
 familiar to you if you used Savon 1.x before. If you're passing a block to the constructor, it is executed using the
-[instance_eval with delegation](http://www.dcmanges.com/blog/ruby-dsls-instance-eval-with-delegation) pattern.
-It's a smart, but ugly, but convenient little hack.
+`instance_eval with delegation` pattern.
 
 ``` ruby
 client = Savon.client do
-  wsdl "http://example.com?wsdl"
+  wsdl "https://example.com?wsdl"
 end
 ```
 
@@ -56,8 +55,8 @@ For example, Savon needs to know about the SOAP endpoint and target namespace of
 
 ``` ruby
 client = Savon.client do
-  endpoint "http://example.com"
-  namespace "http://v1.example.com"
+  endpoint "https://example.com"
+  namespace "https://v1.example.com"
 end
 ```
 
@@ -75,7 +74,7 @@ response = client.call(:authenticate, message: { username: "luke", password: "se
 
 If you used Savon before, this should also look familiar to you. But in contrast to the old client,
 the new `#call` method does not provide the same interface as the old `#request` method. It's all about
-options, so here's where you have various [local options](#locals) that are specific to a request.
+options, so here's where you have various [local options](/version2/locals.html) that are specific to a request.
 
 The `#call` method supports the same interface as the constructor. You can pass a simple Hash or
 a block to use the instance_eval with delegation pattern.

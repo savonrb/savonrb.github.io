@@ -37,7 +37,7 @@ response.full_hash  # => { envelope: { header: { ... }, body: { ... } } }
 
 Note: `response.hash` still works but is deprecated and will be removed in a future release.
 
-Savon uses [Nori](http://rubygems.org/gems/nori) to translate the SOAP response XML to a Hash.
+Savon uses [Nori](https://rubygems.org/gems/nori) to translate the SOAP response XML to a Hash.
 You can change how the response is translated through a couple of global and local options.
 The following example shows the options available to configure Nori and their defaults.
 
@@ -72,7 +72,7 @@ response.to_xml  # => "<response><success>true</success><name>luke</name></respo
 
 ## #doc
 
-Returns the SOAP response as a [Nokogiri](http://nokogiri.org/) document.
+Returns the SOAP response as a [Nokogiri](https://nokogiri.org) document.
 
 ``` ruby
 response.doc  # => #<Nokogiri::XML::Document:0x1017b4268 ...
@@ -80,7 +80,7 @@ response.doc  # => #<Nokogiri::XML::Document:0x1017b4268 ...
 
 ## #xpath
 
-Delegates to [Nokogiri's xpath method](http://nokogiri.org/Nokogiri/XML/Node.html#method-i-xpath).
+Delegates to [Nokogiri's xpath method](https://nokogiri.org/rdoc/Nokogiri/XML/Node.html).
 
 ``` ruby
 response.xpath("//v1:authenticateResponse/return/success").first.inner_text.should == "true"

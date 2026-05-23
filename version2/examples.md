@@ -15,7 +15,7 @@ This example walks through a typical SOAP integration from start to finish: crea
 ``` ruby
 # Create a client from a WSDL
 client = Savon.client(
-  wsdl: "http://example.com/UserService?wsdl",
+  wsdl: "https://example.com/UserService?wsdl",
   pretty_print_xml: true, # logs formatted XML (useful while developing)
   log: true
 )
@@ -38,7 +38,7 @@ Many enterprise services require WS-Security credentials. If you're getting auth
 
 ``` ruby
 client = Savon.client(
-  wsdl: "http://example.com/SecureService?wsdl",
+  wsdl: "https://example.com/SecureService?wsdl",
   wsse_auth: ["username", "password", :digest],
   wsse_timestamp: true
 )

@@ -24,8 +24,8 @@ still set the global `:log_level` and `:filters` options or active `:pretty_prin
 ## Hooks
 
 Are no longer supported. The implementation was way too complex and still didn't properly solve the
-problem of serving as a mock-helper for the [Savon::Spec](http://rubygems.org/gems/savon_spec) gem. If you used
-them for any other purpose, please open an issue and we may find a better solution.
+problem of serving as a mock-helper for the [Savon::Spec](https://rubygems.org/gems/savon_spec) gem.
+If you used them for any other purpose, please open an issue and we may find a better solution.
 
 ## Nori
 

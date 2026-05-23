@@ -17,7 +17,7 @@ Pass `log: true` and `pretty_print_xml: true` when creating the client:
 
 ``` ruby
 client = Savon.client(
-  wsdl: "http://example.com/service?wsdl",
+  wsdl: "https://example.com/service?wsdl",
   log: true,
   pretty_print_xml: true
 )
@@ -28,7 +28,7 @@ With these options set, every request and response is printed to `$stdout`. The 
 ``` xml
 <!-- Savon sending a request to http://example.com/service -->
 <?xml version="1.0" encoding="UTF-8"?>
-<env:Envelope xmlns:env="http://schemas.xmlsoap.org/soap/envelope/" xmlns:tns="http://example.com/">
+<env:Envelope xmlns:env="http://schemas.xmlsoap.org/soap/envelope/" xmlns:tns="https://example.com/">
   <env:Body>
     <tns:findUser>
       <id>42</id>
@@ -117,5 +117,5 @@ Some services put the WSDL behind the same auth as the service itself. Download 
 pass it as a local file path or a String:
 
 ``` ruby
-Savon.client(wsdl: File.read("service.wsdl"), endpoint: "http://example.com/service")
+Savon.client(wsdl: File.read("service.wsdl"), endpoint: "https://example.com/service")
 ```

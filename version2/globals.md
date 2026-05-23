@@ -22,7 +22,7 @@ Savon accepts either a local or remote WSDL document which it uses to extract in
 endpoint and target namespace of the service. Alternatively, you can set the WSDL as a String.
 
 ``` ruby
-Savon.client(wsdl: "http://example.com?wsdl")
+Savon.client(wsdl: "https://example.com?wsdl")
 Savon.client(wsdl: "/Users/me/project/service.wsdl")
 Savon.client(wsdl: File.read("/Users/me/project/service.wsdl"))
 ```
@@ -36,7 +36,7 @@ In case your service doesn't offer a WSDL, you need to tell Savon about the SOAP
 namespace of the service.
 
 ``` ruby
-Savon.client(endpoint: "http://example.com", namespace: "http://v1.example.com")
+Savon.client(endpoint: "https://example.com", namespace: "http://v1.example.com")
 ```
 
 The target namespace is used to namespace the SOAP message. In a WSDL, the target namespace is defined on the
@@ -55,7 +55,7 @@ of a WSDL, as the `location` attribute of a `soap:address` node.
 ``` xml
   <wsdl:service name="AuthenticationWebServiceImplService">
     <wsdl:port binding="tns:AuthenticationWebServiceImplServiceSoapBinding" name="AuthenticationWebServiceImplPort">
-      <soap:address location="http://example.com/validation/1.0/AuthenticationService" />
+      <soap:address location="https://example.com/validation/1.0/AuthenticationService" />
     </wsdl:port>
   </wsdl:service>
 </wsdl:definitions>
@@ -79,7 +79,7 @@ Savon.client(raise_errors: false)
 You can specify a proxy server to use. This will be used for retrieving remote WSDL documents and actual SOAP requests.
 
 ``` ruby
-Savon.client(proxy: "http://example.org")
+Savon.client(proxy: "https://example.org")
 ```
 
 ### headers

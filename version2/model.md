@@ -23,9 +23,9 @@ the `:endpoint` and `:namespace` of the service.
 class User
   extend Savon::Model
 
-  client wsdl: "http://example.com?wsdl"
+  client wsdl: "https://example.com?wsdl"
   # or
-  client endpoint: "http://example.com", namespace: "http://v1.example.com"
+  client endpoint: "https://example.com", namespace: "http://v1.example.com"
 end
 ```
 
@@ -40,7 +40,7 @@ you can pass those as separate arguments to the `.global` method instead of pass
 class User
   extend Savon::Model
 
-  client wsdl: "http://example.com?wsdl"
+  client wsdl: "https://example.com?wsdl"
 
   global :open_timeout, 30
   global :basic_auth, "luke", "secret"
@@ -57,7 +57,7 @@ Use this method to specify which SOAP operations should be available through you
 class User
   extend Savon::Model
 
-  client wsdl: "http://example.com?wsdl"
+  client wsdl: "https://example.com?wsdl"
 
   global :open_timeout, 30
   global :basic_auth, "luke", "secret"

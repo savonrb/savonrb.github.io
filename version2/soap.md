@@ -63,7 +63,7 @@ client.call(:find_user, message: { user_id: 42 })
 </findUser>
 ```
 
-If the service expects a different casing, use `convert_request_keys_to` in the global options. See [Globals](/version2/globals) for all conversion options.
+If the service expects a different casing, use `convert_request_keys_to` in the global options. See [Globals](/version2/globals.html) for all conversion options.
 
 ## Without a WSDL
 
