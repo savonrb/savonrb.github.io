@@ -341,7 +341,7 @@ and the XML instruction:
 Defaults to SOAP 1.1. Can be set to SOAP 1.2 to use a different SOAP endpoint.
 
 ``` ruby
-Savon.client(soap_savon_version: v2)
+Savon.client(soap_version: v2)
 ```
 
 
