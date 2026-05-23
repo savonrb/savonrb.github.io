@@ -82,7 +82,7 @@ a block to use the instance_eval with delegation pattern.
 ``` ruby
 response = client.call(:authenticate) do
   message username: "luke", password: "secret"
-  convert_request_keys_to :camelcase
+  soap_header "Token" => "secret"
 end
 ```
 
