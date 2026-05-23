@@ -29,7 +29,7 @@ the next request. This is wrong and [it caused problems](https://github.com/savo
 does not set the "Cookie" header for you, but it makes it easy for you to handle cookies yourself.
 
 ``` ruby
-response     = client.call(:authenticate, message: credentials)
+response = client.call(:authenticate, message: credentials)
 auth_cookies = response.http.cookies
 
 client.call(:find_user, message: { id: 3 }, cookies: auth_cookies)
@@ -37,6 +37,17 @@ client.call(:find_user, message: { id: 3 }, cookies: auth_cookies)
 
 This option accepts an Array of `HTTPI::Cookie` objects or any object that responds to `cookies`
 (like for example, an `HTTPI::Response`).
+
+### headers
+
+Per-request HTTP headers. Merged with the global `headers` option, so you can keep a base set on the client and add or override just what changes for this call.
+
+``` ruby
+client.call(:find_user,
+  message: { id: 42 },
+  headers: { "X-Request-Id" => SecureRandom.uuid }
+)
+```
 
 
 ## Request
@@ -137,6 +148,90 @@ If you need to, you can even shortcut Savon's Builder and send your very own XML
 client.call(:authenticate, xml: "<envelope><body></body></envelope>")
 ```
 
+### attachments
+
+Send SOAP-with-Attachments parts alongside the SOAP envelope. When `attachments`
+is present, Savon sends the request as `multipart/related`. The SOAP envelope is
+the root MIME part and each attachment is added as a separate part.
+
+Savon does not add attachment references to the SOAP body automatically. Build the
+SOAP message so it references the attachment Content-ID expected by your service,
+usually with a `cid:` URL.
+
+Pass an Array of hashes with `:filename` and `:content`. The filename becomes the
+attachment `Content-ID` and `Content-Location`:
+
+```ruby
+client.call(:upload,
+  message: {
+    document: "",
+    :attributes! => { document: { href: "cid:report.xml" } }
+  },
+  attachments: [
+    { filename: "report.xml", content: "<xml>...</xml>" }
+  ]
+)
+```
+
+The multipart body will contain a SOAP root part and an attachment part similar to this,
+with boundaries and some Mail-generated headers omitted for clarity:
+
+```text
+Content-Type: text/xml; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+Content-ID: <soap-request-body@soap>
+
+<env:Envelope ...>
+  <env:Body>
+    <tns:upload>
+      <document href="cid:report.xml"></document>
+    </tns:upload>
+  </env:Body>
+</env:Envelope>
+
+--boundary
+Content-Type: application/xml; filename=report.xml
+Content-Transfer-Encoding: base64
+Content-Location: report.xml
+Content-ID: <report.xml>
+
+PHhtbD4uLi48L3htbD4=
+```
+
+Pass a Hash of `"content-id" => path` to read attachments from disk. The Hash key
+becomes the attachment `Content-ID`, independent of the file basename:
+
+```ruby
+client.call(:upload,
+  message: {
+    document: "",
+    :attributes! => { document: { href: "cid:invoice" } }
+  },
+  attachments: {
+    "invoice" => "/tmp/invoice-2026-05.pdf"
+  }
+)
+```
+
+Pass an Array of paths to use each file's basename as the attachment `Content-ID`:
+
+```ruby
+client.call(:upload,
+  message: { user_id: 42 },
+  attachments: [
+    "/tmp/report.xml",
+    "/tmp/scan.pdf"
+  ]
+)
+```
+
+Those parts can be referenced from the SOAP body as `cid:report.xml` and `cid:scan.pdf`.
+
+This feature sends generic SOAP-with-Attachments MIME parts. Savon does not create
+MTOM/XOP `xop:Include` elements, optimize base64 content, or switch the request to
+MTOM `application/xop+xml` framing. If your service requires a specific element name,
+namespace, or attribute for attachment references, build that XML in the `message`
+or `xml` option and make sure its `cid:` value matches the attachment `Content-ID`.
 
 ## Response
 
@@ -157,3 +252,13 @@ If you need to switch to REXML, please open an issue and describe the problem yo
 ``` ruby
 client.call(:authenticate, response_parser: :rexml)
 ```
+
+### multipart
+
+Enable parsing of a multipart (MTOM) response for this call. Parsing is built into Savon and does not require any additional gems.
+
+``` ruby
+client.call(:download, message: { id: 42 }, multipart: true)
+```
+
+When enabled, `response.attachments` exposes the parts returned with the SOAP envelope. Set it as a [global option](/version2/globals.html) instead if every operation on the service returns multipart responses.

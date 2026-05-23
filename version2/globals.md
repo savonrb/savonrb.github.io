@@ -14,6 +14,13 @@ Although they are called "global options", they really are local to a client ins
 based on a global `Savon.configure` method to store the configuration. While this was a popular concept
 back then, adapted by tons of libraries, its problem is global state. I tried to fix that problem.
 
+Options marked with a <span class="option-badge option-badge-deprecated">deprecated under Faraday</span>
+badge belong to the HTTPI transport layer. They keep working with the default `transport: :httpi`, but
+Savon rejects them when you opt into `transport: :faraday`. Faraday exposes its own setup API for
+proxies, timeouts, TLS, auth, redirects, and adapters. Configure those through `client.faraday` instead.
+See the [`transport`](#transport) option below for examples. If you mix them, Savon raises a
+`Savon::InitializationError` that points you at the matching Faraday call.
+
 ## Service setup
 
 ### wsdl
@@ -30,27 +37,15 @@ Savon.client(wsdl: File.read("/Users/me/project/service.wsdl"))
 For learning how to read a WSDL document, read the [Beginner's Guide](http://predic8.com/wsdl-reading.htm) by Thomas Bayer.
 It's a good idea to know what you're working with and this might really help you debug certain problems.
 
-### endpoint and namespace
+### endpoint
 
-In case your service doesn't offer a WSDL, you need to tell Savon about the SOAP endpoint and target
-namespace of the service.
+The URL at which your service accepts SOAP requests. Required when your service doesn't offer a WSDL. Can also be used to overwrite the endpoint defined in a WSDL document.
 
 ``` ruby
 Savon.client(endpoint: "https://example.com", namespace: "http://v1.example.com")
 ```
 
-The target namespace is used to namespace the SOAP message. In a WSDL, the target namespace is defined on the
-`wsdl:definitions` (root) node, along with the service's name and namespace declarations.
-
-``` xml
-<wsdl:definitions
-  name="AuthenticationWebServiceImplService"
-  targetNamespace="http://v1_0.ws.auth.order.example.com/"
-  xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
-```
-
-The SOAP endpoint is the URL at which your service accepts SOAP requests. It is usually defined at the bottom
-of a WSDL, as the `location` attribute of a `soap:address` node.
+In a WSDL, the SOAP endpoint is usually defined at the bottom as the `location` attribute of a `soap:address` node.
 
 ``` xml
   <wsdl:service name="AuthenticationWebServiceImplService">
@@ -61,7 +56,22 @@ of a WSDL, as the `location` attribute of a `soap:address` node.
 </wsdl:definitions>
 ```
 
-You can also use these options to overwrite these values in a WDSL document in case you need to.
+### namespace
+
+The target namespace of the service, used to namespace the SOAP message. Required when your service doesn't offer a WSDL. Can also be used to overwrite the namespace defined in a WSDL document.
+
+``` ruby
+Savon.client(endpoint: "https://example.com", namespace: "http://v1.example.com")
+```
+
+In a WSDL, the target namespace is defined on the `wsdl:definitions` (root) node, along with the service's name and namespace declarations.
+
+``` xml
+<wsdl:definitions
+  name="AuthenticationWebServiceImplService"
+  targetNamespace="http://v1_0.ws.auth.order.example.com/"
+  xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+```
 
 ### raise_errors
 
@@ -75,6 +85,8 @@ Savon.client(raise_errors: false)
 ## HTTP
 
 ### proxy
+
+<p class="option-badge-row"><a class="option-badge option-badge-deprecated" href="#transport">deprecated under Faraday</a></p>
 
 You can specify a proxy server to use. This will be used for retrieving remote WSDL documents and actual SOAP requests.
 
@@ -90,14 +102,47 @@ Additional HTTP headers for the request.
 Savon.client(headers: { "Authentication" => "secret" })
 ```
 
-### timeouts
+### open_timeout
 
-Both open and read timeout can be set (in seconds). This will be used for retrieving remote WSDL documents and actually
-SOAP requests.
+<p class="option-badge-row"><a class="option-badge option-badge-deprecated" href="#transport">deprecated under Faraday</a></p>
+
+How long Savon waits (in seconds) to establish a connection. Used for both retrieving remote WSDL documents and sending SOAP requests.
 
 ``` ruby
-Savon.client(open_timeout: 5, read_timeout: 5)
+Savon.client(open_timeout: 5)
 ```
+
+### read_timeout
+
+<p class="option-badge-row"><a class="option-badge option-badge-deprecated" href="#transport">deprecated under Faraday</a></p>
+
+How long Savon waits (in seconds) for the server to send response data after the request has been sent. Used for both retrieving remote WSDL documents and sending SOAP requests.
+
+``` ruby
+Savon.client(read_timeout: 5)
+```
+
+### write_timeout
+
+<p class="option-badge-row"><a class="option-badge option-badge-deprecated" href="#transport">deprecated under Faraday</a></p>
+
+How long Savon waits (in seconds) when sending the request body. Useful when uploading large payloads or attachments.
+
+``` ruby
+Savon.client(write_timeout: 30)
+```
+
+### adapter
+
+<p class="option-badge-row"><a class="option-badge option-badge-deprecated" href="#transport">deprecated under Faraday</a></p>
+
+Selects the [HTTPI](https://github.com/savonrb/httpi) adapter used by the client.
+
+``` ruby
+Savon.client(wsdl: "https://example.com?wsdl", adapter: :httpclient)
+```
+
+This option is HTTPI-specific. With `transport: :faraday`, configure the adapter through `client.faraday` instead.
 
 ### transport
 
@@ -135,6 +180,8 @@ documents and actual SOAP requests.
 
 ### ssl_verify_mode
 
+<p class="option-badge-row"><a class="option-badge option-badge-deprecated" href="#transport">deprecated under Faraday</a></p>
+
 You can disable SSL verification if you know what you're doing.
 
 ``` ruby
@@ -143,13 +190,48 @@ Savon.client(ssl_verify_mode: :none)
 
 ### ssl_version
 
+<p class="option-badge-row"><a class="option-badge option-badge-deprecated" href="#transport">deprecated under Faraday</a></p>
+
 Change the SSL version to use.
 
 ``` ruby
 Savon.client(ssl_version: :SSLv3)  # or one of [:TLSv1, :SSLv2]
 ```
 
+### ssl_min_version
+
+<p class="option-badge-row"><a class="option-badge option-badge-deprecated" href="#transport">deprecated under Faraday</a></p>
+
+Sets the lowest TLS version allowed during the handshake. Useful when you want to refuse anything below a known-safe floor while still allowing the server and client to negotiate a newer version.
+
+``` ruby
+Savon.client(ssl_min_version: :TLS1_2)
+```
+
+### ssl_max_version
+
+<p class="option-badge-row"><a class="option-badge option-badge-deprecated" href="#transport">deprecated under Faraday</a></p>
+
+Sets the highest TLS version allowed during the handshake. Pair with `ssl_min_version` to constrain negotiation to a version range instead of pinning a single version with `ssl_version`.
+
+``` ruby
+Savon.client(ssl_max_version: :TLS1_3)
+```
+
+### ssl_ciphers
+
+<p class="option-badge-row"><a class="option-badge option-badge-deprecated" href="#transport">deprecated under Faraday</a></p>
+
+Restrict the cipher suites offered during the TLS handshake. The value is passed straight through to OpenSSL, so any cipher string accepted by your OpenSSL build works.
+
+``` ruby
+# Only high-strength suites, no anonymous auth, no MD5
+Savon.client(ssl_ciphers: "HIGH:!aNULL:!MD5")
+```
+
 ### ssl_cert_file
+
+<p class="option-badge-row"><a class="option-badge option-badge-deprecated" href="#transport">deprecated under Faraday</a></p>
 
 Sets the SSL cert file to use, or sets the path to the directory that contains the cert file(s).
 
@@ -159,6 +241,8 @@ Savon.client(ssl_cert_file: "lib/client_cert.pem")
 
 ### ssl_cert_key_file
 
+<p class="option-badge-row"><a class="option-badge option-badge-deprecated" href="#transport">deprecated under Faraday</a></p>
+
 Sets the SSL cert key file to use.
 
 ``` ruby
@@ -167,13 +251,41 @@ Savon.client(ssl_cert_key_file: "lib/client_key.pem")
 
 ### ssl_ca_cert_file
 
+<p class="option-badge-row"><a class="option-badge option-badge-deprecated" href="#transport">deprecated under Faraday</a></p>
+
 Sets the SSL ca cert file to use, or sets the path to the directory that contains the ca cert file(s).
 
 ``` ruby
 Savon.client(ssl_ca_cert_file: "lib/ca_cert.pem")
 ```
 
+### ssl_ca_cert_path
+
+<p class="option-badge-row"><a class="option-badge option-badge-deprecated" href="#transport">deprecated under Faraday</a></p>
+
+Path to a directory of trusted CA certificates. Use this when you have a directory of certs instead of a single bundle file.
+
+``` ruby
+Savon.client(ssl_ca_cert_path: "/etc/ssl/certs")
+```
+
+### ssl_cert_store
+
+<p class="option-badge-row"><a class="option-badge option-badge-deprecated" href="#transport">deprecated under Faraday</a></p>
+
+An `OpenSSL::X509::Store` to use for certificate verification. Useful when you build a custom trust store at boot and want every Savon client to share it.
+
+``` ruby
+store = OpenSSL::X509::Store.new
+store.set_default_paths
+store.add_file("config/internal_ca.pem")
+
+Savon.client(ssl_cert_store: store)
+```
+
 ### ssl_cert_key_password
+
+<p class="option-badge-row"><a class="option-badge option-badge-deprecated" href="#transport">deprecated under Faraday</a></p>
 
 Sets the cert key password to decrypt an encrypted private key.
 
@@ -344,12 +456,37 @@ Defaults to SOAP 1.1. Can be set to SOAP 1.2 to use a different SOAP endpoint.
 Savon.client(soap_version: v2)
 ```
 
+### unwrap
+
+Tells [Gyoku](https://github.com/savonrb/gyoku) to unwrap an Array of Hashes when building the request. Without it, Gyoku wraps each Hash in a parent tag matching the key. With `unwrap: true`, the parent tag is repeated for each entry instead.
+
+``` ruby
+Savon.client(unwrap: true)
+
+client.call(:create_users, message: {
+  users: [{ name: "luke" }, { name: "lea" }]
+})
+```
+
+``` xml
+<users>
+  <name>luke</name>
+</users>
+<users>
+  <name>lea</name>
+</users>
+```
+
+Defaults to `false`.
+
 
 ## Authentication
 
 HTTP authentication will be used for retrieving remote WSDL documents and actual SOAP requests.
 
 ### basic_auth
+
+<p class="option-badge-row"><a class="option-badge option-badge-deprecated" href="#transport">deprecated under Faraday</a></p>
 
 Savon supports HTTP basic authentication.
 
@@ -358,6 +495,8 @@ Savon.client(basic_auth: ["luke", "secret"])
 ```
 
 ### digest_auth
+
+<p class="option-badge-row"><a class="option-badge option-badge-deprecated" href="#transport">deprecated under Faraday</a></p>
 
 And HTTP digest authentication. If you wish to use digest auth you must ensure that you have included the gem httpclient, or another one of the [HTTPI](https://github.com/savonrb/httpi) adapters that supports HTTP digest authentication.  Failing to do so will not produce errors, but if the HTTPI adapter ends up using net_http, digest authentication will not be performed.
 
@@ -396,7 +535,26 @@ Savon.client(
 )
 ```
 
+### wsse_signature
+
+XML Signature support via [Akami](https://github.com/savonrb/akami). Sign the SOAP envelope with an X.509 certificate when the service requires it.
+
+``` ruby
+wsse_signature = Akami::WSSE::Signature.new(
+  Akami::WSSE::Certs.new(
+    cert_file: "client_cert.pem",
+    private_key_file: "client_key.pem"
+  )
+)
+
+Savon.client(wsdl: "https://example.com?wsdl", wsse_signature:)
+```
+
+This is independent of `wsse_auth`. A service may require either, both, or neither.
+
 ### ntlm
+
+<p class="option-badge-row"><a class="option-badge option-badge-deprecated" href="#transport">deprecated under Faraday</a></p>
 
 HTTPI v2.1.0 supports [NTLM authentication](http://httpirb.com/#authentication) through its `:net_http` adapter.
 The optional third argument allows you to specify a domain. If the domain is omitted, it is assumed
@@ -447,6 +605,24 @@ You can have it your very own way.
 ``` ruby
 response.body["USER_RESPONSE"]["ID"]
 ```
+
+### delete_namespace_attributes
+
+Tells [Nori](https://github.com/savonrb/nori) to drop `xmlns:*` attributes from the response. Defaults to `false`. Enable it when those attributes survive `strip_namespaces` and clutter the Hash you actually want to work with.
+
+``` ruby
+Savon.client(delete_namespace_attributes: true)
+```
+
+### multipart
+
+Enable parsing of multipart (MTOM) SOAP responses. Defaults to `false`. Parsing is built into Savon via the `mail` gem and does not require any additional gems.
+
+``` ruby
+Savon.client(wsdl: "...", multipart: true)
+```
+
+When enabled, `response.attachments` exposes the parts attached to the response. Setting it globally turns on multipart parsing for every operation. Set it as a [local option](/version2/locals.html#multipart) to enable it for a single call instead.
 
 
 ## Logging
@@ -506,4 +682,12 @@ Pretty print the request and response XML in your logs for debugging purposes.
 
 ``` ruby
 Savon.client(pretty_print_xml: true)
+```
+
+### log_headers
+
+Whether HTTP request and response headers are logged alongside the bodies. Defaults to `true`. Turn it off when headers carry tokens or cookies you do not want in your log output and you cannot rely on `filters` (which only redacts XML elements in the body).
+
+``` ruby
+Savon.client(log: true, log_headers: false)
 ```

@@ -181,6 +181,39 @@ pre code {
   .vi, .na, .nd, .nl, .nx                     { color: var(--color-code-text); }
 }
 
+// --- Badges ---
+
+.option-badge {
+  display: inline-block;
+  vertical-align: middle;
+  padding: 0.1em 0.55em;
+  border-radius: 999px;
+  font-family: var(--font-body);
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  line-height: 1.4;
+  border: 1px solid var(--color-border);
+  background: var(--color-overlay);
+  color: var(--color-subtle);
+}
+
+.option-badge-deprecated {
+  border-color: color-mix(in srgb, var(--color-accent) 30%, var(--color-border));
+  color: var(--color-accent);
+  background: color-mix(in srgb, var(--color-accent) 8%, var(--color-overlay));
+}
+
+// Pulls the badge up to sit directly beneath the heading text.
+.option-badge-row {
+  margin: -1rem 0 1rem;
+}
+
+a.option-badge,
+a.option-badge:hover {
+  text-decoration: none;
+}
+
 // --- Tables ---
 
 table {
