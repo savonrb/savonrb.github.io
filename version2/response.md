@@ -101,3 +101,27 @@ response.success?     # => false
 response.soap_fault?  # => true
 response.http_error?  # => false
 ```
+
+## #soap_fault
+
+Returns the `Savon::SOAPFault` for the response, or `nil` when no SOAP fault occurred. Useful as a conditional when `raise_errors` is disabled:
+
+``` ruby
+if fault = response.soap_fault
+  logger.warn "SOAP fault: #{fault.to_hash[:fault][:faultstring]}"
+end
+```
+
+When `raise_errors` is enabled (the default), Savon raises the fault instead of returning it on the response.
+
+## #http_error
+
+Returns the `Savon::HTTPError` for the response, or `nil` when the HTTP layer returned a successful status. Useful as a conditional when `raise_errors` is disabled:
+
+``` ruby
+if error = response.http_error
+  logger.warn "HTTP error: #{error.to_s}"
+end
+```
+
+When `raise_errors` is enabled (the default), Savon raises the error instead of returning it on the response.
