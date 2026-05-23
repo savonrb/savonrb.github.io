@@ -41,11 +41,6 @@ through Savon. Instead of `Gyoku.convert_symbols_to`, please use the global `:co
 
 Was updated to version 2 which comes with [support for EM-HTTPRequest](https://github.com/savonrb/httpi/pull/40).
 
-## WSSE signature
-
-Was not covered with specs and has been removed. If anyone uses this and wants to provide a
-properly tested implementation, please talk to me.
-
 ## response[]
 
 The Hash-like read-access to the response was removed.
