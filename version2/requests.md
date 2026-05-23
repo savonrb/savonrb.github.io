@@ -21,7 +21,7 @@ was known as the SOAP `body` Hash in version 1. The reason to change the naming 
 and the fact that the former "body" never really influenced the entire SOAP body.
 
 If Savon has a WSDL, it verifies whether your service actually contains the operation you're trying to call
-and raises an `ArgumentError` in case it doesn't exist.
+and raises a `Savon::UnknownOperationError` in case it doesn't exist.
 
 When you're calling a SOAP operation with a message Hash, Savon defaults to convert Hash key Symbols to
 lowerCamelcase XML tags. It does not convert any Hash key Strings. You can change this with the global

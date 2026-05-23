@@ -31,7 +31,7 @@ When you create a client, Savon fetches and parses the WSDL document. It:
 
 - builds the list of available operations available via `client.operations`
 - maps camelCase operation names to Ruby snake_case symbols
-- validates that the operation you call exists, raising an `ArgumentError` if not
+- validates that the operation you call exists, raising a `Savon::UnknownOperationError` if not
 - reads the endpoint URL and namespace automatically
 
 You do not need to parse the WSDL yourself to get started. But reading it helps when a request fails - the WSDL defines the exact element names and nesting expected, and comparing that against what Savon sends (visible with `log: true, pretty_print_xml: true`) is usually how you find the problem.
