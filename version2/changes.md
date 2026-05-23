@@ -41,11 +41,6 @@ through Savon. Instead of `Gyoku.convert_symbols_to`, please use the global `:co
 
 Was updated to version 2 which comes with [support for EM-HTTPRequest](https://github.com/savonrb/httpi/pull/40).
 
-## NTLM authentication
-
-Support will probably be added in the next version. This really needs some good specs
-and integration tests first.
-
 ## WSSE signature
 
 Was not covered with specs and has been removed. If anyone uses this and wants to provide a
