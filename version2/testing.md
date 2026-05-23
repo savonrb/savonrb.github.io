@@ -12,7 +12,7 @@ Testing integration with a SOAP service does not differ from testing integration
 There is really no "right way" of doing this, but from my experience, it's good to have both unit and
 integration tests to strike a balance between test speed and reliability.
 
-Where Savon 1.0 had [Savon::Spec](https://rubygems.org/gems/savon_spec) to mock SOAP requests, Savon 2.0
+Where Savon v1 had [Savon::Spec](https://rubygems.org/gems/savon_spec) to mock SOAP requests, Savon v2
 adds support for mocking requests on top of observers. Since it's always a good idea to wrap external
 libraries, let's assume you created a simple class for talking to some kind of authentication service.
 

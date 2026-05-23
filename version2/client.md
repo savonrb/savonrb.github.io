@@ -11,16 +11,16 @@ nav_savon_version: v2
 Install Savon via [RubyGems.org](https://rubygems.org/gems/savon):
 
 ``` bash
-gem install savon --version '~> 2.0'
+gem install savon --version '~> 2.7'
 ```
 
 or add it to your [Gemfile](https://bundler.io/man/gemfile.5.html):
 
 ``` ruby
-gem 'savon', '~> 2.0'
+gem 'savon', '~> 2.7'
 ```
 
-The new client is supposed be a lot simpler to use, because everything in Savon 2.0 is based on a defined set
+The new client is supposed be a lot simpler to use, because everything in Savon v2 is based on a defined set
 of global and local options. To create a new client based on a WSDL document, you could set the global `:wsdl`
 option by passing a Hash to the `Savon.client` "factory method". The client's constructor accepts various
 [global options](/version2/globals.html) which are specific to a service.
