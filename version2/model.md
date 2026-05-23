@@ -84,3 +84,18 @@ response = User.find_user(1)
 
 In the previous User class example, we're overwriting the `.find_user` operation and delegating to `super`
 with a SOAP message Hash. You can do that both on the class and on the instance.
+
+## .all_operations
+
+Registers every operation from the WSDL in one call, instead of listing them by hand. Equivalent to passing `client.operations` to `.operations`.
+
+``` ruby
+class User
+  extend Savon::Model
+
+  client wsdl: "https://example.com?wsdl"
+  all_operations
+end
+```
+
+Requires a WSDL. Without one, Savon does not know which operations exist. 
