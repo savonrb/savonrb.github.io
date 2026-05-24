@@ -20,18 +20,15 @@ or add it to your [Gemfile](https://bundler.io/man/gemfile.5.html):
 gem 'savon', '~> 2.7'
 ```
 
-The new client is supposed be a lot simpler to use, because everything in Savon v2 is based on a defined set
-of global and local options. To create a new client based on a WSDL document, you could set the global `:wsdl`
-option by passing a Hash to the `Savon.client` "factory method". The client's constructor accepts various
+To create a new client based on a WSDL document, you could set the global `:wsdl` option by passing a Hash
+to the `Savon.client` "factory method". The client's constructor accepts various
 [global options](/version2/globals.html) which are specific to a service.
 
 ``` ruby
 client = Savon.client(wsdl: "https://example.com?wsdl")
 ```
 
-Along with the simple Hash-based interface, Savon also comes with an interface based on blocks. This should look
-familiar to you if you used Savon 1.x before. If you're passing a block to the constructor, it is executed using the
-`instance_eval with delegation` pattern.
+Along with the simple Hash-based interface, Savon also comes with an interface based on blocks. If you're passing a block to the constructor, it is executed using the `instance_eval with delegation` pattern.
 
 ``` ruby
 client = Savon.client do
@@ -72,9 +69,8 @@ But the client really exists to send SOAP messages, so let's do that.
 response = client.call(:authenticate, message: { username: "luke", password: "secret" })
 ```
 
-If you used Savon before, this should also look familiar to you. But in contrast to the old client,
-the new `#call` method does not provide the same interface as the old `#request` method. It's all about
-options, so here's where you have various [local options](/version2/locals.html) that are specific to a request.
+Sending a request is all about options. `#call` takes the operation name plus any
+[local options](/version2/locals.html) that are specific to that request.
 
 The `#call` method supports the same interface as the constructor. You can pass a simple Hash or
 a block to use the instance_eval with delegation pattern.

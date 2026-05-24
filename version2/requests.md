@@ -16,12 +16,11 @@ message = { username: 'luke', password: 'secret' }
 response = client.call(:authenticate, message: message)
 ```
 
-In this example, the Symbol `:authenticate` is the name of the SOAP operation and the `message` Hash is what
-was known as the SOAP `body` Hash in version 1. The reason to change the naming is related to the SOAP request
-and the fact that the former "body" never really influenced the entire SOAP body.
+In this example, the Symbol `:authenticate` is the name of the SOAP operation and the `message` Hash
+is your payload.
 
-If Savon has a WSDL, it verifies whether your service actually contains the operation you're trying to call
-and raises a `Savon::UnknownOperationError` in case it doesn't exist.
+If Savon has a WSDL, it verifies whether your service actually contains the operation you're trying to
+call and raises a `Savon::UnknownOperationError` in case it doesn't exist.
 
 When you're calling a SOAP operation with a message Hash, Savon defaults to convert Hash key Symbols to
 lowerCamelcase XML tags. It does not convert any Hash key Strings. You can change this with the global

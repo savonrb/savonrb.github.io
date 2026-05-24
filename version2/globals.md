@@ -9,10 +9,7 @@ nav_savon_version: v2
 ---
 
 Global options are passed to the client's constructor and are specific to a service.
-
-Although they are called "global options", they really are local to a client instance. Savon version 1 was
-based on a global `Savon.configure` method to store the configuration. While this was a popular concept
-back then, adapted by tons of libraries, its problem is global state. I tried to fix that problem.
+Although they are called "global options", they really are local to a client instance.
 
 Options marked with a <span class="option-badge option-badge-deprecated">deprecated under Faraday</span>
 badge belong to the HTTPI transport layer. They keep working with the default `transport: :httpi`, but
@@ -174,9 +171,7 @@ Configure those through `client.faraday` instead.
 
 ## SSL
 
-Unfortunately, SSL options were [missing from the initial 2.0 release](https://github.com/savonrb/savon/issues/344).
-Please update to at least version 2.0.2 to use the following options. These will be used for retrieving remote WSDL
-documents and actual SOAP requests.
+These will be used for retrieving remote WSDL documents and actual SOAP requests.
 
 ### ssl_verify_mode
 

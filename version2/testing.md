@@ -117,5 +117,3 @@ soap_fault = File.read("spec/fixtures/authentication_service/soap_fault.xml")
 response = { code: 500, headers: {}, body: soap_fault }
 savon.expects(:authenticate).with(message: message).returns(response)
 ```
-
-This is a brand new feature, so please give it a try and let me know what you think.
