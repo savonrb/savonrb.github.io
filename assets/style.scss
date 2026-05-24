@@ -496,6 +496,39 @@ header .site_tagline {
   font-weight: 500;
 }
 
+// --- Heading anchors ---
+
+.guides_content {
+  h2[id],
+  h3[id] {
+    scroll-margin-top: 2rem;
+  }
+
+  h2 a.heading_anchor,
+  h3 a.heading_anchor {
+    color: inherit;
+    text-decoration: none;
+
+    &:hover {
+      color: inherit;
+      text-decoration: none;
+
+      &::after {
+        opacity: 1;
+      }
+    }
+
+    &::after {
+      content: "#";
+      margin-left: 0.4rem;
+      color: var(--color-accent);
+      font-weight: 400;
+      opacity: 0;
+      transition: opacity 120ms ease;
+    }
+  }
+}
+
 // --- TOC ---
 
 #toc_container {

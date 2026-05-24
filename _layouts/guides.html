@@ -46,3 +46,13 @@ layout: default
     {% endif %}
   </div>
 </div>
+
+<script>
+  document.querySelectorAll('.guides_content h2[id], .guides_content h3[id]').forEach(function (h) {
+    var link = document.createElement('a');
+    link.href = '#' + h.id;
+    link.className = 'heading_anchor';
+    while (h.firstChild) { link.appendChild(h.firstChild); }
+    h.appendChild(link);
+  });
+</script>
