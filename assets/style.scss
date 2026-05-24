@@ -161,6 +161,7 @@ code {
   padding: 0.15em 0.4em;
   border-radius: 4px;
   font-size: 0.875em;
+  overflow-wrap: anywhere;
 }
 
 pre {
@@ -169,6 +170,8 @@ pre {
   border-radius: 6px;
   padding: 1.25rem;
   overflow-x: auto;
+  text-wrap: auto;
+  max-width: 100%;
   line-height: 1.6;
   box-shadow: none;
 }
@@ -233,6 +236,10 @@ a.option-badge:hover {
 table {
   border-collapse: collapse;
   width: 100%;
+}
+
+th, td {
+  word-break: break-word;
 }
 
 th {
@@ -567,17 +574,16 @@ header .site_tagline {
 // --- Footer ---
 
 .footer {
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
   gap: 2rem;
   margin-top: 4rem;
-  margin-bottom: 4rem;
+  margin-bottom: 2.5rem;
   padding-top: 2rem;
   border-top: 1px solid var(--color-border);
 }
 
 .footer_hero {
-  flex: 1 1 180px;
   display: flex;
   flex-direction: column;
   gap: 0.25rem;
@@ -596,7 +602,6 @@ header .site_tagline {
 }
 
 .footer_element {
-  flex: 1 1 120px;
   display: flex;
   flex-direction: column;
   gap: 0.35rem;
@@ -630,6 +635,15 @@ header .site_tagline {
     display: none;
   }
 
+  .btn {
+    padding: 5px 10px;
+    font-size: 0.75rem;
+  }
+
+  #downloads {
+    gap: 0.4rem;
+  }
+
   .guides_layout {
     flex-direction: column;
     gap: 1.5rem;
@@ -649,16 +663,23 @@ header .site_tagline {
 
   .sidebar_nav li a {
     border-left: none;
-    padding: 0.2rem 0;
+    padding: 0.2rem 0.5rem;
+    border-radius: 4px;
   }
 
   .sidebar_nav li.active a {
     border-left: none;
-    text-decoration: underline;
+    background: var(--color-overlay);
+    color: var(--color-text);
+    text-decoration: none;
   }
 
   .sidebar_version {
     padding-left: 0;
+  }
+
+  .footer_hero {
+    grid-column: 1 / -1;
   }
 
 }
