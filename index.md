@@ -98,10 +98,4 @@ gem 'savon', '~> 2.17'
     <p>Focused, copy-pasteable snippets for common patterns: key conversion, nested messages, arrays, response navigation, error handling, and more.</p>
     <p class="home_docs_links"><a href="/version2/examples">Examples →</a></p>
   </article>
-
-  <article class="home_docs_card">
-    <h3 class="no_toc"><a href="/version2/changes">Changes</a></h3>
-    <p>Release notes for each version.</p>
-    <p class="home_docs_links"><a href="/version2/changes">Changes →</a></p>
-  </article>
 </div>
