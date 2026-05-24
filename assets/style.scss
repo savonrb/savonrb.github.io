@@ -25,26 +25,26 @@
   src: url('/assets/fonts/JetBrainsMono-Regular.woff2') format('woff2');
 }
 
-// Light mode — warm neutral, purple accent
+// Light mode — cool gray base, terracotta + teal accents
 :root {
-  --color-bg:           #F8F7F4;
+  --color-bg:           #f2f3f5;
   --color-surface:      #FFFFFF;
-  --color-overlay:      #F0EDE8;
-  --color-muted:        #736F68;
-  --color-subtle:       #6B6660;
-  --color-text:         #44403C;
-  --color-heading:      #3B1FA8;
-  --color-accent:       #7C3AED;
-  --color-accent-hover: #9333EA;
-  --color-border:       #E5E2DC;
-  --color-code-bg:      #F0EDE8;
-  --color-code-text:    #1C1B1A;
+  --color-overlay:      #eceef2;
+  --color-muted:        #6A6C72;
+  --color-subtle:       #4A4C52;
+  --color-text:         #1F2024;
+  --color-heading:      #E54E60;
+  --color-accent:       #0EA88F;
+  --color-accent-hover: #0A7E6B;
+  --color-border:       #D4D7DD;
+  --color-code-bg:      #FFFFFF;
+  --color-code-text:    #1F2024;
 
-  --syntax-comment:     #6E6A63;
-  --syntax-keyword:     #7C3AED;
-  --syntax-string:      #3F7A22;
-  --syntax-literal:     #B45309;
-  --syntax-name:        #0E7490;
+  --syntax-comment:     #7A7C82;
+  --syntax-keyword:     #0F7868;
+  --syntax-string:      #2E7A3D;
+  --syntax-literal:     #A45A0F;
+  --syntax-name:        #C24E1A;
 
   --font-heading: 'Space Grotesk', system-ui, sans-serif;
   --font-body:    'DM Sans', system-ui, sans-serif;
@@ -57,21 +57,21 @@
     --color-bg:           #141312;
     --color-surface:      #1D1C1A;
     --color-overlay:      #272523;
-    --color-muted:        #85807A;
-    --color-subtle:       #9A9590;
-    --color-text:         #C9C5BE;
-    --color-heading:      #C4B5FD;
-    --color-accent:       #A78BFA;
-    --color-accent-hover: #C4B5FD;
+    --color-muted:        #84817C;
+    --color-subtle:       #9A9692;
+    --color-text:         #C8C6C2;
+    --color-heading:      #ffb58a;
+    --color-accent:       #8affdd;
+    --color-accent-hover: #b0ffe8;
     --color-border:       #2C2A28;
     --color-code-bg:      #1D1C1A;
     --color-code-text:    #F0EDE8;
 
-    --syntax-comment:     #8B867E;
-    --syntax-keyword:     #A78BFA;
-    --syntax-string:      #8FB573;
-    --syntax-literal:     #E0A458;
-    --syntax-name:        #7FB3C8;
+    --syntax-comment:     #85807A;
+    --syntax-keyword:     #8affdd;
+    --syntax-string:      #a3d18a;
+    --syntax-literal:     #ffb58a;
+    --syntax-name:        #f5d699;
   }
 }
 
@@ -340,7 +340,7 @@ header .site_tagline {
 
 .btn:hover {
   color: var(--color-accent-hover);
-  border-color: var(--color-accent);
+  border-color: var(--color-accent-hover);
   text-decoration: none;
   background: var(--color-overlay);
 }
