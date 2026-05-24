@@ -134,7 +134,7 @@ This should be handled automatically, but we need real world examples to do so.
 ### soap_header
 
 Since v2.3.0 you can specify the SOAP header per request. When both the global and local
-option is used, Savon will merge the global with the local Hash.
+option is used, Savon will merge the global with the local Hash and the local keys win.
 
 ``` ruby
 client.call(:authenticate, :soap_header => { "OpToken" => "secret" })
