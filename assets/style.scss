@@ -297,8 +297,12 @@ header .site_tagline {
   margin: 0;
   flex-shrink: 0;
 }
-#downloads i {
-  padding-right: 0.2rem;
+#downloads .btn_icon {
+  width: 1em;
+  height: 1em;
+  vertical-align: -0.125em;
+  margin-right: 0.2rem;
+  fill: currentColor;
 }
 
 .btn {
