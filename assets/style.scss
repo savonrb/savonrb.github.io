@@ -75,17 +75,31 @@
   }
 }
 
-@import "{{ site.theme }}";
+// --- Base reset ---
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  width: 90%;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+section img {
+  max-width: 100%;
+}
+
+#main_content {
+  -webkit-font-smoothing: antialiased;
+}
 
 // --- Global ---
 
-* {
-  text-shadow: none !important;
-}
-
 body {
   background-color: var(--color-bg);
-  background-image: none;
   color: var(--color-text);
   font-family: var(--font-body);
   font-size: 16px;
@@ -306,14 +320,15 @@ header .site_tagline {
 }
 
 .btn {
+  display: inline-block;
   background: var(--color-overlay);
   color: var(--color-subtle);
   border: 1px solid var(--color-border);
   border-radius: 4px;
+  padding: 8px 18px;
   font-family: var(--font-body);
   font-size: 0.8rem;
-  text-shadow: none;
-  box-shadow: none;
+  font-weight: bold;
 }
 
 .btn:hover {
