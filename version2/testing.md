@@ -98,7 +98,7 @@ savon.expects(:authenticate).with(message: message)
 ## Fixtures
 
 Should match a recorded SOAP response from the server for the request you're testing.
-The `#returns` method accepts a few options which are used to create an HTTPI response.
+The `#returns` method accepts a few options which are used to create a `Savon::Transport::Response`.
 
 ``` ruby
 message = { username: "luke", password: "secret" }

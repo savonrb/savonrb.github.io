@@ -15,8 +15,8 @@ or rescue `Savon::Error` to catch them all.
 
 ## Savon::SOAPFault
 
-Raised when the server returns a SOAP fault error. The error object contains the [HTTPI](https://github.com/savonrb/httpi)
-response for you to further investigate what went wrong.
+Raised when the server returns a SOAP fault error. The error object contains the `Savon::Transport::Response` so you can further investigate
+what went wrong, including its `code`, `headers`, and `body`.
 
 ``` ruby
 def authenticate(credentials)
@@ -56,7 +56,7 @@ end
 ## Savon::HTTPError
 
 Raised when Savon considers the HTTP response to be not successful. You can rescue this error and access the
-[HTTPI](https://github.com/savonrb/httpi) response for investigation.
+transport response (`Savon::Transport::Response`) for investigation.
 
 ``` ruby
 def authenticate(credentials)

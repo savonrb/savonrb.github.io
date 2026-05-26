@@ -88,10 +88,15 @@ response.xpath("//v1:authenticateResponse/return/success").first.inner_text.shou
 
 ## #http
 
-Returns the [HTTPI](https://github.com/savonrb/httpi) response.
+Returns the underlying `Savon::Transport::Response`, which wraps the HTTP response
+from the configured adapter (HTTPI or Faraday). It exposes `code`, `headers`, and
+`body` for inspecting the transport-level response.
 
 ``` ruby
-response.http  # => #<HTTPI::Response:0x1017b4268 ...
+response.http          # => Savon::Transport::Response
+response.http.code     # => 200
+response.http.headers  # => { "Content-Type" => "text/xml" }
+response.http.body     # => "<soap:Envelope>...</soap:Envelope>"
 ```
 
 In case you disabled the global `:raise_errors` option, you can ask the response for its state.
