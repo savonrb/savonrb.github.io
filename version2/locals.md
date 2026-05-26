@@ -255,10 +255,9 @@ client.call(:authenticate, response_parser: :rexml)
 
 ### multipart
 
-Enable parsing of a multipart (MTOM) response for this call. Parsing is built into Savon and does not require any additional gems.
+<p class="option-badge-row"><span class="option-badge option-badge-deprecated">deprecated</span></p>
 
-``` ruby
-client.call(:download, message: { id: 42 }, multipart: true)
-```
-
-When enabled, `response.attachments` exposes the parts returned with the SOAP envelope. Set it as a [global option](/version2/globals.html) instead if every operation on the service returns multipart responses.
+No-op since v2.13.0. Savon detects multipart (MTOM) responses from the `Content-Type`
+header and parses them regardless of this option, so it never enabled or disabled
+anything for the call. Safe to remove. When the response is multipart, `response.attachments`
+exposes the parts attached to the response.

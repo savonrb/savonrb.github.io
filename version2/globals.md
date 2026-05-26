@@ -611,13 +611,12 @@ Savon.client(delete_namespace_attributes: true)
 
 ### multipart
 
-Enable parsing of multipart (MTOM) SOAP responses. Defaults to `false`. Parsing is built into Savon via the `mail` gem and does not require any additional gems.
+<p class="option-badge-row"><span class="option-badge option-badge-deprecated">deprecated</span></p>
 
-``` ruby
-Savon.client(wsdl: "...", multipart: true)
-```
-
-When enabled, `response.attachments` exposes the parts attached to the response. Setting it globally turns on multipart parsing for every operation. Set it as a [local option](/version2/locals.html#multipart) to enable it for a single call instead.
+No-op since v2.13.0. Savon detects multipart (MTOM) responses from the `Content-Type`
+header and parses them regardless of this option, so it never enabled or disabled
+anything. Safe to remove. When the response is multipart, `response.attachments`
+exposes the parts attached to the response.
 
 
 ## Logging
