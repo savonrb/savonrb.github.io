@@ -23,32 +23,29 @@ client = Savon.client(
 )
 ```
 
-With these options set, every request and response is printed to `$stdout`. The output looks something like this:
+With these options set, every request and response is written to `$stdout` through a Ruby `Logger`.
+The output looks something like this:
 
-``` xml
-<!-- Savon sending a request to http://example.com/service -->
-<?xml version="1.0" encoding="UTF-8"?>
-<env:Envelope xmlns:env="http://schemas.xmlsoap.org/soap/envelope/" xmlns:tns="https://example.com/">
-  <env:Body>
-    <tns:findUser>
-      <id>42</id>
-    </tns:findUser>
-  </env:Body>
-</env:Envelope>
-
-<!-- Savon received the following response -->
-<?xml version="1.0" encoding="UTF-8"?>
-<env:Envelope xmlns:env="http://schemas.xmlsoap.org/soap/envelope/">
-  <env:Body>
-    <tns:findUserResponse>
-      <user>
-        <id>42</id>
-        <name>Luke</name>
-      </user>
-    </tns:findUserResponse>
-  </env:Body>
-</env:Envelope>
 ```
+I, [2026-05-26T10:00:00.000 #12345]  INFO -- : SOAP request: http://example.com/service
+I, [2026-05-26T10:00:00.000 #12345]  INFO -- : Content-Type: text/xml;charset=UTF-8
+SOAPAction: "findUser"
+D, [2026-05-26T10:00:00.000 #12345] DEBUG -- : <?xml version="1.0" encoding="UTF-8"?><env:Envelope xmlns:env="http://schemas.xmlsoap.org/soap/envelope/" xmlns:tns="https://example.com/"><env:Body><tns:findUser><id>42</id></tns:findUser></env:Body></env:Envelope>
+I, [2026-05-26T10:00:00.100 #12345]  INFO -- : SOAP response (status 200)
+D, [2026-05-26T10:00:00.100 #12345] DEBUG -- : Content-Type: text/xml;charset=UTF-8
+Content-Length: 380
+D, [2026-05-26T10:00:00.100 #12345] DEBUG -- : <?xml version="1.0" encoding="UTF-8"?><env:Envelope xmlns:env="http://schemas.xmlsoap.org/soap/envelope/"><env:Body><tns:findUserResponse><user><id>42</id><name>Luke</name></user></tns:findUserResponse></env:Body></env:Envelope>
+```
+
+The request URL and response status are logged at `INFO`. The XML bodies are logged at `DEBUG`,
+as are the response headers. Set `pretty_print_xml: true` to indent the XML bodies across multiple
+lines.
+
+You can tune what gets logged:
+
+- `log_headers: false` suppresses both the request and response header blocks (defaults to `true`).
+- `log_level: :info` raises the Logger threshold so the `DEBUG` lines (XML bodies and response
+  headers) are dropped.
 
 In a Rails app, point logging at the Rails logger so output goes to your normal log stream:
 
@@ -56,6 +53,7 @@ In a Rails app, point logging at the Rails logger so output goes to your normal 
 client = Savon.client(
   wsdl: "...",
   logger: Rails.logger,
+  log: true,
   log_level: :debug,
   pretty_print_xml: true
 )
