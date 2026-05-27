@@ -445,10 +445,10 @@ and the XML instruction:
 
 ### soap_version
 
-Defaults to SOAP 1.1. Can be set to SOAP 1.2 to use a different SOAP endpoint.
+Defaults to SOAP 1.1. Set to `2` to use SOAP 1.2, which changes the envelope namespace and the request `Content-Type` accordingly.
 
 ``` ruby
-Savon.client(soap_version: v2)
+Savon.client(soap_version: 2)
 ```
 
 ### unwrap
