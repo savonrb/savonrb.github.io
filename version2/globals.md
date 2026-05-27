@@ -187,10 +187,10 @@ Savon.client(ssl_verify_mode: :none)
 
 <p class="option-badge-row"><a class="option-badge option-badge-deprecated" href="#transport">deprecated under Faraday</a></p>
 
-Change the SSL version to use.
+Pins the TLS protocol version to use. Prefer `ssl_min_version` and `ssl_max_version` when you can allow the client and server to negotiate within a TLS range.
 
 ``` ruby
-Savon.client(ssl_version: :SSLv3)  # or one of [:TLSv1, :SSLv2]
+Savon.client(ssl_version: :TLSv1_2)
 ```
 
 ### ssl_min_version
@@ -228,7 +228,7 @@ Savon.client(ssl_ciphers: "HIGH:!aNULL:!MD5")
 
 <p class="option-badge-row"><a class="option-badge option-badge-deprecated" href="#transport">deprecated under Faraday</a></p>
 
-Sets the SSL cert file to use, or sets the path to the directory that contains the cert file(s).
+Sets the client certificate file to use for TLS client authentication.
 
 ``` ruby
 Savon.client(ssl_cert_file: "lib/client_cert.pem")
@@ -248,7 +248,7 @@ Savon.client(ssl_cert_key_file: "lib/client_key.pem")
 
 <p class="option-badge-row"><a class="option-badge option-badge-deprecated" href="#transport">deprecated under Faraday</a></p>
 
-Sets the SSL ca cert file to use, or sets the path to the directory that contains the ca cert file(s).
+Sets the trusted CA certificate file to use for peer verification. Use `ssl_ca_cert_path` for a directory of trusted CA certificates.
 
 ``` ruby
 Savon.client(ssl_ca_cert_file: "lib/ca_cert.pem")
