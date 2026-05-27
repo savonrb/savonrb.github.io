@@ -27,7 +27,7 @@ The [WSDL 1.1 specification](https://www.w3.org/TR/wsdl.html) defines the format
 
 ## How Savon reads the WSDL
 
-When you create a client, Savon fetches and parses the WSDL document. It:
+Savon fetches and parses the WSDL lazily, the first time it needs metadata from it. For example when you call `client.operations`, make a request, or read the endpoint or namespace. Creating a client with an unreachable or broken WSDL URL will not raise on initialization. Once parsed, Savon:
 
 - builds the list of available operations available via `client.operations`
 - maps camelCase operation names to Ruby snake_case symbols
