@@ -76,4 +76,4 @@ client = Savon.client(
 )
 ```
 
-You will also need to set `soap_action` and possibly `message_tag` per request. See [Local options](/version2/locals) for details.
+You will often need to set `soap_action` and possibly `message_tag` per request. If you do not set `soap_action`, Savon falls back to a Gyoku-converted operation name, which works for some services but not all. See [Local options](/version2/locals) for details.

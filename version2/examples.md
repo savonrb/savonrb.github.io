@@ -189,7 +189,7 @@ client.call(:find_user, message: { id: 42 }, cookies: cookies)
 
 ## Without a WSDL
 
-When no WSDL is available, provide the endpoint and namespace manually. You will also need to set `soap_action` per request.
+When no WSDL is available, provide the endpoint and namespace manually. You will often need to set `soap_action` per request as well. Otherwise Savon falls back to a Gyoku-converted operation name, which works for some services but not all.
 
 ``` ruby
 client = Savon.client(
