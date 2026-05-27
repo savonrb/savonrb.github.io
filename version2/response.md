@@ -46,8 +46,20 @@ client = Savon.client do
   # Savon defaults to strip namespaces from the response
   strip_namespaces true
 
-  # Savon defaults to convert Hash key Symbols to lowerCamelCase XML tags
-  convert_request_keys_to :camelcase
+  # Savon defaults to convert response XML tags to snakecase Symbols
+  convert_response_tags_to ->(tag) { tag.snakecase.to_sym }
+
+  # Savon defaults to keeping xmlns:* attributes on response nodes
+  delete_namespace_attributes false
+
+  # Savon defaults to nil for empty XML tags (set to "" for an empty String)
+  empty_tag_value nil
+
+  # Savon defaults to converting dashes in response tag names to underscores
+  convert_dashes_to_underscores true
+
+  # Savon defaults to scrubbing invalid byte sequences from the response body
+  scrub_xml true
 end
 
 client.call(:operation) do
