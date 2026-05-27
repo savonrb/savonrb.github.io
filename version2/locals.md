@@ -233,6 +233,52 @@ MTOM `application/xop+xml` framing. If your service requires a specific element 
 namespace, or attribute for attachment references, build that XML in the `message`
 or `xml` option and make sure its `cid:` value matches the attachment `Content-ID`.
 
+## Authentication
+
+The three [WSSE](globals.html#wsse_auth) options accepted by the client constructor can also be
+passed per request. The local value overrides the global for that single call. Use this when
+one operation needs different credentials, a different signing key, or needs to disable a
+header that's normally set globally.
+
+### wsse_auth
+
+Per-request WSSE basic or digest credentials. Overrides the global `wsse_auth` for this call only.
+
+``` ruby
+client.call(:authenticate, wsse_auth: ["lea", "top-secret", :digest])
+```
+
+Pass `false` to suppress a globally configured `wsse_auth` for one call:
+
+``` ruby
+client.call(:public_lookup, wsse_auth: false)
+```
+
+### wsse_timestamp
+
+Per-request WS-Security timestamp. Overrides the global `wsse_timestamp` for this call.
+
+``` ruby
+client.call(:authenticate, wsse_timestamp: true)
+```
+
+### wsse_signature
+
+Per-request XML Signature via [Akami](https://github.com/savonrb/akami). Overrides the global
+`wsse_signature` for this call.
+
+``` ruby
+signature = Akami::WSSE::Signature.new(
+  Akami::WSSE::Certs.new(
+    cert_file: "client_cert.pem",
+    private_key_file: "client_key.pem"
+  )
+)
+
+client.call(:sign_document, wsse_signature: signature)
+```
+
+
 ## Response
 
 ### advanced_typecasting

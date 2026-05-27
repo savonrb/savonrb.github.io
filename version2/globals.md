@@ -70,6 +70,17 @@ In a WSDL, the target namespace is defined on the `wsdl:definitions` (root) node
   xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
 ```
 
+### host
+
+Overrides the host (and port) of the endpoint that Savon extracts from the WSDL. The path stays
+intact, so this is useful for pointing a WSDL-defined service at a different environment (staging,
+a local mock, a regional host) without rewriting the WSDL or setting a full `endpoint`. Ignored
+when `endpoint` is set.
+
+``` ruby
+Savon.client(wsdl: "https://example.com?wsdl", host: "https://staging.example.com")
+```
+
 ### raise_errors
 
 By default, Savon raises SOAP fault and HTTP errors. You can disable both errors and query the response instead.
@@ -127,6 +138,19 @@ How long Savon waits (in seconds) when sending the request body. Useful when upl
 
 ``` ruby
 Savon.client(write_timeout: 30)
+```
+
+### follow_redirects
+
+<p class="option-badge-row"><a class="option-badge option-badge-deprecated" href="#transport">deprecated under Faraday</a></p>
+
+Whether requests should follow HTTP redirects. Defaults to `false`. Requires an HTTPI adapter that
+supports redirect following; with `transport: :faraday`, configure
+[`faraday-follow-redirects`](https://github.com/tisba/faraday-follow-redirects) on `client.faraday`
+instead.
+
+``` ruby
+Savon.client(follow_redirects: true)
 ```
 
 ### adapter
@@ -234,6 +258,18 @@ Sets the client certificate file to use for TLS client authentication.
 Savon.client(ssl_cert_file: "lib/client_cert.pem")
 ```
 
+### ssl_cert
+
+<p class="option-badge-row"><a class="option-badge option-badge-deprecated" href="#transport">deprecated under Faraday</a></p>
+
+Object form of `ssl_cert_file`. Pass a preloaded `OpenSSL::X509::Certificate` instead of a file
+path. Maps directly to HTTPI's `ssl.cert`.
+
+``` ruby
+cert = OpenSSL::X509::Certificate.new(File.read("lib/client_cert.pem"))
+Savon.client(ssl_cert: cert)
+```
+
 ### ssl_cert_key_file
 
 <p class="option-badge-row"><a class="option-badge option-badge-deprecated" href="#transport">deprecated under Faraday</a></p>
@@ -244,6 +280,18 @@ Sets the SSL cert key file to use.
 Savon.client(ssl_cert_key_file: "lib/client_key.pem")
 ```
 
+### ssl_cert_key
+
+<p class="option-badge-row"><a class="option-badge option-badge-deprecated" href="#transport">deprecated under Faraday</a></p>
+
+Object form of `ssl_cert_key_file`. Pass a preloaded `OpenSSL::PKey` instance instead of a file
+path. Pair with `ssl_cert_key_password` if the key was encrypted on disk.
+
+``` ruby
+key = OpenSSL::PKey.read(File.read("lib/client_key.pem"))
+Savon.client(ssl_cert_key: key)
+```
+
 ### ssl_ca_cert_file
 
 <p class="option-badge-row"><a class="option-badge option-badge-deprecated" href="#transport">deprecated under Faraday</a></p>
@@ -252,6 +300,19 @@ Sets the trusted CA certificate file to use for peer verification. Use `ssl_ca_c
 
 ``` ruby
 Savon.client(ssl_ca_cert_file: "lib/ca_cert.pem")
+```
+
+### ssl_ca_cert
+
+<p class="option-badge-row"><a class="option-badge option-badge-deprecated" href="#transport">deprecated under Faraday</a></p>
+
+Object form of `ssl_ca_cert_file`. Pass a preloaded `OpenSSL::X509::Certificate` to use as the
+trust anchor for peer verification. For multiple CA certificates, build a store with
+`ssl_cert_store` instead.
+
+``` ruby
+ca_cert = OpenSSL::X509::Certificate.new(File.read("lib/ca_cert.pem"))
+Savon.client(ssl_ca_cert: ca_cert)
 ```
 
 ### ssl_ca_cert_path
@@ -451,6 +512,37 @@ Defaults to SOAP 1.1. Set to `2` to use SOAP 1.2, which changes the envelope nam
 Savon.client(soap_version: 2)
 ```
 
+### use_wsa_headers
+
+Adds [WS-Addressing](https://www.w3.org/Submission/ws-addressing/) headers to every request. `wsa:Action` reuses the request's SOAPAction,
+`wsa:To` is the endpoint, and `wsa:MessageID` is a fresh `urn:uuid` per request. Defaults to
+`false`. Enable it when the service requires WS-Addressing.
+
+``` ruby
+Savon.client(use_wsa_headers: true)
+```
+
+The resulting `<env:Header>` looks like this:
+
+``` xml
+<env:Header>
+  <wsa:Action>urn:Authenticate</wsa:Action>
+  <wsa:To>https://example.com/service</wsa:To>
+  <wsa:MessageID>urn:uuid:7e3f...</wsa:MessageID>
+</env:Header>
+```
+
+### no_message_tag
+
+Skips the SOAP message tag that Savon usually wraps around the body. With `no_message_tag: true`,
+the `message` (or raw `xml`) is inserted directly inside `<env:Body>` instead of being wrapped in
+the operation name tag. Useful for services that expect a custom root element you build yourself.
+Defaults to `false`.
+
+``` ruby
+Savon.client(no_message_tag: true)
+```
+
 ### unwrap
 
 Tells [Gyoku](https://github.com/savonrb/gyoku) to unwrap an Array of Hashes when building the request. Without it, Gyoku wraps each Hash in a parent tag matching the key. With `unwrap: true`, the parent tag is repeated for each entry instead.
@@ -607,6 +699,45 @@ Tells [Nori](https://github.com/savonrb/nori) to drop `xmlns:*` attributes from 
 
 ``` ruby
 Savon.client(delete_namespace_attributes: true)
+```
+
+### convert_attributes_to
+
+Tells [Nori](https://github.com/savonrb/nori) how to convert XML attributes on response tags into
+Hash keys. Accepts a lambda or block that receives `(key, value)` and returns a `[key, value]`
+pair. Defaults to passing them through unchanged.
+
+``` ruby
+Savon.client(convert_attributes_to: ->(key, value) { [key.snakecase.to_sym, value] })
+```
+
+### empty_tag_value
+
+The value Nori assigns to empty XML tags in the response. Defaults to `nil`, matching Nori's
+default. Set it to `""` to map empty tags to an empty `String` instead.
+
+``` ruby
+Savon.client(empty_tag_value: "")
+```
+
+### convert_dashes_to_underscores
+
+Tells [Nori](https://github.com/savonrb/nori) whether dashes in response tag names should be
+converted to underscores before they become Hash keys. Defaults to `true`, so `<user-name>`
+parses to `:user_name`. Disable it to preserve dashes in the keys.
+
+``` ruby
+Savon.client(convert_dashes_to_underscores: false)
+```
+
+### scrub_xml
+
+Tells [Nori](https://github.com/savonrb/nori) whether to scrub invalid byte sequences from the
+response body before parsing it. Defaults to `true`, which lets responses containing invalid
+characters still be parsed. Set to `false` to surface those bytes as parser errors instead.
+
+``` ruby
+Savon.client(scrub_xml: false)
 ```
 
 ### multipart

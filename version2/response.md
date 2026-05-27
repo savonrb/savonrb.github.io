@@ -27,6 +27,40 @@ Translates the response and returns the SOAP body as a Hash.
 response.body  # => { response: { success: true, name: "luke" } }
 ```
 
+`#to_hash` is an alias for `#body`.
+
+``` ruby
+response.to_hash  # => { response: { success: true, name: "luke" } }
+```
+
+## #find
+
+Walks the parsed envelope by tag name, returning the value at the given path or `nil` when a key
+is missing. Useful when you want to drill into a deeply nested response without chaining `[]`
+through Hashes that might be `nil`.
+
+``` ruby
+response.find("Body", "AuthenticateResponse", "Return")
+# => { success: true, name: "luke" }
+```
+
+`#header` and `#body` are thin wrappers around `#find("Header")` and `#find("Body")`.
+
+## #to_array
+
+Looks up a path under the SOAP body and always returns an Array. Returns `[]` if any key in the
+path is `nil`, wraps a single Hash in an Array, and returns the existing Array compacted
+otherwise. Handy when a service sometimes returns one element and sometimes many for the same
+field.
+
+``` ruby
+response.to_array(:authenticate_response, :users, :user)
+# => [{ id: 1, name: "luke" }, { id: 2, name: "lea" }]
+
+response.to_array(:authenticate_response, :missing)
+# => []
+```
+
 ## #full_hash
 
 Translates the response and returns the full envelope as a Hash, including both header and body.
@@ -76,10 +110,11 @@ the [README](https://github.com/savonrb/nori/blob/main/README.md).
 
 ## #to_xml
 
-Returns the raw SOAP response.
+Returns the raw SOAP response. `#to_s` is an alias for the same value.
 
 ``` ruby
 response.to_xml  # => "<response><success>true</success><name>luke</name></response>"
+response.to_s    # same
 ```
 
 ## #doc
@@ -96,6 +131,26 @@ Delegates to [Nokogiri's xpath method](https://nokogiri.org/rdoc/Nokogiri/XML/No
 
 ``` ruby
 response.xpath("//v1:authenticateResponse/return/success").first.inner_text.should == "true"
+```
+
+## #multipart?
+
+Returns `true` when the response `Content-Type` header starts with `multipart`.
+
+``` ruby
+response.multipart?  # => true
+```
+
+## #attachments
+
+For multipart (MTOM) responses, returns the non-SOAP MIME parts as an
+Array of [`Mail::Part`](https://github.com/mikel/mail) objects. Returns `[]` when the response
+isn't multipart.
+
+``` ruby
+response.attachments.each do |part|
+  File.binwrite("downloads/#{part.filename}", part.body.decoded)
+end
 ```
 
 ## #http
@@ -118,6 +173,8 @@ response.success?     # => false
 response.soap_fault?  # => true
 response.http_error?  # => false
 ```
+
+`#successful?` is an alias for `#success?`.
 
 ## #soap_fault
 
