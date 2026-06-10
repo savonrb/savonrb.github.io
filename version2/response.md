@@ -156,14 +156,23 @@ end
 ## #http
 
 Returns the underlying `Savon::Transport::Response`, which wraps the HTTP response
-from the configured adapter (HTTPI or Faraday). It exposes `code`, `headers`, and
-`body` for inspecting the transport-level response.
+from the configured adapter (HTTPI or Faraday). It exposes `code`, `headers`, `body`,
+and `cookies` for inspecting the transport-level response.
 
 ``` ruby
 response.http          # => Savon::Transport::Response
 response.http.code     # => 200
 response.http.headers  # => { "Content-Type" => "text/xml" }
 response.http.body     # => "<soap:Envelope>...</soap:Envelope>"
+```
+
+The shape of `cookies` depends on the transport. The HTTPI transport returns an Array
+of `HTTPI::Cookie` objects, the Faraday transport returns a Hash of cookie names to values.
+Both shapes can be passed back to the next request via the [`cookies`](/version2/locals.html#cookies) local.
+
+``` ruby
+response.http.cookies  # => [#<HTTPI::Cookie ...>]      with transport: :httpi
+response.http.cookies  # => { "token" => "secret" }     with transport: :faraday
 ```
 
 In case you disabled the global `:raise_errors` option, you can ask the response for its state.

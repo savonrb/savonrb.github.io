@@ -35,8 +35,12 @@ auth_cookies = response.http.cookies
 client.call(:find_user, message: { id: 3 }, cookies: auth_cookies)
 ```
 
-This option accepts an Array of `HTTPI::Cookie` objects or any object that responds to `cookies`
-(like for example, an `HTTPI::Response`).
+The accepted shapes depend on the transport. With the default HTTPI transport, this option
+accepts an Array of `HTTPI::Cookie` objects or any object that responds to `cookies`
+(like for example, an `HTTPI::Response`). With `transport: :faraday`, it accepts a String
+(used verbatim as the `Cookie` header) or a Hash of cookie names to values (formatted as
+`"name=value; name=value"`). Either way, `response.http.cookies` returns a shape you can
+pass straight back into this option.
 
 ### headers
 
