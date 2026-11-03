@@ -22,7 +22,10 @@ require "savon"
 class AuthenticationService
 
   def initialize
-    @client = Savon.client(wsdl: "https://example.com?wsdl")
+    @client = Savon.client(
+      endpoint: "https://example.com/authentication",
+      namespace: "http://v1.example.com/authentication"
+    )
   end
 
   def authenticate(message)
@@ -70,6 +73,12 @@ end
 
 As you can see in this example, you have to explicitly set Savon in and out of mock mode before and after
 your specs. The example uses RSpec's `before` and `after` hooks for that.
+
+Mock mode only replaces the SOAP request. A client created with a remote `wsdl:` still downloads the WSDL
+to look up the operation, so the spec needs network access and fails if the URL does not serve a real WSDL.
+The example above sets the [`endpoint`](/version2/globals.html#endpoint) and [`namespace`](/version2/globals.html#namespace)
+instead. If your client needs the WSDL, pass it a local copy in your specs, e.g.
+`wsdl: "spec/fixtures/authentication_service/service.wsdl"`.
 
 ## Expectations
 
