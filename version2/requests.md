@@ -77,6 +77,36 @@ The contents of the body tag come from the [`message`](/version2/locals.html#mes
 
 For XML that doesn't map cleanly to a Hash, pass any object that responds to `#to_s`, or skip Savon's builder entirely with the [`xml`](/version2/locals.html#xml) local. See [Locals](/version2/locals.html) for examples.
 
+You can also control the order of the message elements. By default, Savon emits them in the
+order of the Hash you pass. Pass an explicit `order!` array on a Hash to fix the order of
+that level:
+
+``` ruby
+client.call(:create_order,
+  message: {
+    customer: "alice",
+    address: { zip: "75001", city: "Paris", order!: %i[zip city] }
+  }
+)
+```
+
+Or pass `order!: :use_schema` to order each level like the WSDL's `xs:sequence`:
+
+``` ruby
+client.call(:create_order,
+  message: {
+    total: 9, address: { zip: "75001", street: "1 Main St", city: "Paris" },
+    customer: "alice", order!: :use_schema
+  }
+)
+```
+
+Nested Hashes and Arrays of Hashes follow the schema, and an explicit `order!` array on a
+nested Hash still wins. A level the schema does not describe, or a key it does not list,
+raises `Savon::Error` instead of guessing the order: pass an explicit `order!` array on
+that level to work around it. Elements inside an `xs:choice` or `xs:group` are not described
+by the schema, so they raise unless you give that level its own `order!` array.
+
 ## Beyond the envelope
 
 A request also carries HTTP-level state and, optionally, MIME parts:

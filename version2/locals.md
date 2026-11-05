@@ -232,10 +232,38 @@ client.call(:upload,
 Those parts can be referenced from the SOAP body as `cid:report.xml` and `cid:scan.pdf`.
 
 This feature sends generic SOAP-with-Attachments MIME parts. Savon does not create
-MTOM/XOP `xop:Include` elements, optimize base64 content, or switch the request to
-MTOM `application/xop+xml` framing. If your service requires a specific element name,
-namespace, or attribute for attachment references, build that XML in the `message`
-or `xml` option and make sure its `cid:` value matches the attachment `Content-ID`.
+MTOM/XOP `xop:Include` elements, optimize base64 content, or validate those references.
+If your service requires a specific element name, namespace, or attribute for attachment
+references, build that XML in the `message` or `xml` option and make sure its `cid:`
+value matches the attachment `Content-ID`. To switch the request to MTOM
+`application/xop+xml` framing instead, pass `mtom: true` (see below).
+
+### mtom
+
+Send the request with MTOM/XOP framing instead of plain SOAP-with-Attachments. The envelope
+becomes the `application/xop+xml` root part of a `multipart/related` request, and the binary
+parts travel as MIME attachments instead of base64 text. You build the `xop:Include` XML
+yourself, and each attachment's `Content-ID` must match the `cid:` href:
+
+``` ruby
+client.call(:upload,
+  xml: <<~XML,
+    <soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"
+                   xmlns:xop="http://www.w3.org/2004/08/xop/include">
+      <soap:Body>
+        <tns:upload><tns:file><xop:Include href="cid:doc1@example"/></tns:file></tns:upload>
+      </soap:Body>
+    </soap:Envelope>
+  XML
+  mtom: true,
+  attachments: [{ filename: "report.pdf", content_id: "doc1@example", content: File.binread("report.pdf") }]
+)
+```
+
+`mtom: true` without `attachments` has no effect. Savon does not rewrite base64 XML into XOP,
+generate `xop:Include` nodes, infer MIME types from the XML, or deserialize inbound MTOM
+responses. For SOAP 1.2, the action is still sent as a `SOAPAction` header, as elsewhere in
+Savon, rather than as the `action=` parameter of the start-info media type.
 
 ## Authentication
 
