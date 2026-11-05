@@ -18,7 +18,7 @@ Savon 2.x is the current stable version and requires Ruby 3.0 or later.
 Add to your Gemfile and run `bundle install`:
 
 ``` ruby
-gem 'savon', '~> 2.17'
+gem 'savon', '~> 2.18'
 ```
 
 ## What's in the docs
