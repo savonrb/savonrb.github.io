@@ -535,7 +535,7 @@ The resulting `<env:Header>` looks like this:
 ### no_message_tag
 
 Skips the SOAP message tag that Savon usually wraps around the body. With `no_message_tag: true`,
-the `message` (or raw `xml`) is inserted directly inside `<env:Body>` instead of being wrapped in
+the `message` is inserted directly inside `<env:Body>` instead of being wrapped in
 the operation name tag. Useful for services that expect a custom root element you build yourself.
 Defaults to `false`.
 
@@ -545,7 +545,7 @@ Savon.client(no_message_tag: true)
 
 ### unwrap
 
-Tells [Gyoku](https://github.com/savonrb/gyoku) to unwrap an Array of Hashes when building the request. Without it, Gyoku wraps each Hash in a parent tag matching the key. With `unwrap: true`, the parent tag is repeated for each entry instead.
+Tells [Gyoku](https://github.com/savonrb/gyoku) to unwrap an Array of Hashes when building the request. Without it, Gyoku repeats the parent tag for each entry. With `unwrap: true`, the entries are collected under a single parent tag instead.
 
 ``` ruby
 Savon.client(unwrap: true)
@@ -558,8 +558,6 @@ client.call(:create_users, message: {
 ``` xml
 <users>
   <name>luke</name>
-</users>
-<users>
   <name>lea</name>
 </users>
 ```
@@ -585,7 +583,7 @@ Savon.client(basic_auth: ["luke", "secret"])
 
 <p class="option-badge-row"><a class="option-badge option-badge-deprecated" href="#transport">deprecated under Faraday</a></p>
 
-And HTTP digest authentication. If you wish to use digest auth you must ensure that you have included the gem httpclient, or another one of the [HTTPI](https://github.com/savonrb/httpi) adapters that supports HTTP digest authentication.  Failing to do so will not produce errors, but if the HTTPI adapter ends up using net_http, digest authentication will not be performed.
+And HTTP digest authentication. If you wish to use digest auth you must ensure that you have included the gem httpclient, or another one of the [HTTPI](https://github.com/savonrb/httpi) adapters that supports HTTP digest authentication. With the `:net_http` adapter, a digest-auth request raises `HTTPI::NotSupportedError` — use httpclient or another adapter that supports digest authentication.
 
 ``` ruby
 Savon.client do
@@ -667,7 +665,7 @@ Savon.client(strip_namespaces: false)
 Here's how the response Hash would look like if namespaces were not stripped from the response:
 
 ``` ruby
-response.hash["soap:envelope"]["soap:body"]["ns2:authenticate_response"]
+response.full_hash[:"soap:envelope"][:"soap:body"][:"ns2:authenticate_response"]
 ```
 
 ### convert_response_tags_to
@@ -683,7 +681,7 @@ You can specify your own `Proc` or any object that responds to `#call`. It is ca
 tag and simply has to return the converted tag.
 
 ``` ruby
-upcase = lambda { |key| key.snakecase.upcase }
+upcase = lambda { |key| Savon::StringUtils.snakecase(key).upcase }
 Savon.client(convert_response_tags_to: upcase)
 ```
 
@@ -708,7 +706,7 @@ Hash keys. Accepts a lambda or block that receives `(key, value)` and returns a 
 pair. Defaults to passing them through unchanged.
 
 ``` ruby
-Savon.client(convert_attributes_to: ->(key, value) { [key.snakecase.to_sym, value] })
+Savon.client(convert_attributes_to: ->(key, value) { [Savon::StringUtils.snakecase(key).to_sym, value] })
 ```
 
 ### empty_tag_value
