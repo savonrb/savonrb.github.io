@@ -48,10 +48,11 @@ response.find("Body", "AuthenticateResponse", "Return")
 
 ## #to_array
 
-Looks up a path under the SOAP body and always returns an Array. Returns `[]` if any key in the
-path is `nil`, wraps a single Hash in an Array, and returns the existing Array compacted
-otherwise. Handy when a service sometimes returns one element and sometimes many for the same
-field.
+Looks up a path under the SOAP body and always returns an Array. Returns `[]` if a Hash key in
+the path is missing or `nil`, wraps a single Hash in an Array, and returns the existing Array
+compacted otherwise. The path must not descend through an Array element, and the response must
+have a Body — otherwise it raises. Handy when a service sometimes returns one element and
+sometimes many for the same field.
 
 ``` ruby
 response.to_array(:authenticate_response, :users, :user)
@@ -81,7 +82,7 @@ client = Savon.client do
   strip_namespaces true
 
   # Savon defaults to convert response XML tags to snakecase Symbols
-  convert_response_tags_to ->(tag) { tag.snakecase.to_sym }
+  convert_response_tags_to ->(tag) { Savon::StringUtils.snakecase(tag).to_sym }
 
   # Savon defaults to keeping xmlns:* attributes on response nodes
   delete_namespace_attributes false
@@ -113,7 +114,7 @@ the [README](https://github.com/savonrb/nori/blob/main/README.md).
 Returns the raw SOAP response. `#to_s` is an alias for the same value.
 
 ``` ruby
-response.to_xml  # => "<response><success>true</success><name>luke</name></response>"
+response.to_xml  # => "<soap:Envelope …><soap:Body>…</soap:Body></soap:Envelope>"
 response.to_s    # same
 ```
 

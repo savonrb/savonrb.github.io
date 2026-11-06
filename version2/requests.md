@@ -69,7 +69,7 @@ Optional, for metadata that isn't part of the operation payload like auth tokens
 
 ### Body
 
-The Body wraps the payload in a single element named after the operation. Savon takes the name from the WSDL when available, otherwise from the operation symbol.Override it with the [`message_tag`](/version2/locals.html#message_tag) local when you need to, and add XML attributes to the tag with the [`attributes`](/version2/locals.html#attributes) local.
+The Body wraps the payload in a single element named after the operation. Savon takes the name from the WSDL when available, otherwise from the operation symbol. Override it with the [`message_tag`](/version2/locals.html#message_tag) local when you need to, and add XML attributes to the tag with the [`attributes`](/version2/locals.html#attributes) local. When the WSDL defines typed message parts for the operation, the WSDL's tag is always used and `message_tag` is ignored.
 
 ### Message
 

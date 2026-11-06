@@ -24,7 +24,7 @@ Savon calls the `#notify` method of every observer in the order they were added 
 the operation that is being called, the builder which can be asked for the generated request XML and
 any global and local options.
 
-In the previous example, we're explicitly returning `nil` from the `#notify` method to allow Savon to continue and execute the request. But you can also return a `Savon::Transport::Response` to mock the request.
+In the previous example, we're explicitly returning `nil` from the `#notify` method to allow Savon to continue and execute the request. But you can also return a `Savon::Transport::Response` to mock the request. Only the last registered observer's return value decides: if it returns a `Savon::Transport::Response` the request is mocked, and if it returns `nil` the request executes — an earlier observer's response is discarded. Returning anything else raises `Savon::Error`. (Returning an `HTTPI::Response` still works but is deprecated.)
 
 ``` ruby
 class Observer

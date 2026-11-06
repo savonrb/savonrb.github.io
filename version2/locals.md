@@ -98,7 +98,8 @@ client.call(:authenticate, message_tag: :authenticationRequest)
 ```
 
 This should be set by Savon if it has a WSDL. If it doesn't, it generates a message tag from the SOAP
-operation name. Here's how the option changes the request.
+operation name. When the WSDL defines typed message parts for the operation, the WSDL's tag is
+always used and `message_tag` is ignored. Here's how the option changes the request.
 
 ``` xml
 <env:Envelope
@@ -151,6 +152,9 @@ If you need to, you can even shortcut Savon's Builder and send your very own XML
 ``` ruby
 client.call(:authenticate, xml: "<envelope><body></body></envelope>")
 ```
+
+This skips envelope, header, WSSE, and message-tag building entirely — the XML is sent as-is
+(still wrapped in a multipart request when `attachments` are present).
 
 ### attachments
 
@@ -270,7 +274,8 @@ Savon, rather than as the `action=` parameter of the start-info media type.
 The three [WSSE](globals.html#wsse_auth) options accepted by the client constructor can also be
 passed per request. The local value overrides the global for that single call. Use this when
 one operation needs different credentials, a different signing key, or needs to disable a
-header that's normally set globally.
+header that's normally set globally. Only `wsse_auth` and `wsse_timestamp` can be disabled
+per call — see below.
 
 ### wsse_auth
 
@@ -297,7 +302,8 @@ client.call(:authenticate, wsse_timestamp: true)
 ### wsse_signature
 
 Per-request XML Signature via [Akami](https://github.com/savonrb/akami). Overrides the global
-`wsse_signature` for this call.
+`wsse_signature` for this call. Passing `false` or `nil` does not disable a global signature —
+it falls back to it. There is no per-call way to suppress signing.
 
 ``` ruby
 signature = Akami::WSSE::Signature.new(

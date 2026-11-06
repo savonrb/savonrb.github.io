@@ -72,7 +72,7 @@ The example rescues from HTTP errors, logs the HTTP response code and re-raises 
 ## Savon::InvalidResponseError
 
 Raised when you try to access the response header or body of a response that is not a SOAP response as a Hash.
-If the response is not an XML document with an envelope, a header and a body node, it's not accessible as a Hash.
+If the parsed document has no Envelope Hash, it's not accessible as a Hash — a missing Header or Body just yields `nil`.
 
 ``` ruby
 def get_id_from_response(response)
